@@ -24,6 +24,7 @@
                 app:cardBackgroundColor="?attr/backgroundColor"
                 android:foreground="@drawable/image_foreground"
                 android:scaleType="centerCrop"
+                app:strokeColor="#1ACF4DB3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -90,6 +91,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
+                app:strokeColor="#1ACF4DB3"
                 app:layout_constraintStart_toStartOf="@id/tvPreviousWorkout"
                 app:layout_constraintTop_toBottomOf="@id/tvPreviousWorkout"
                 app:shapeAppearance="@style/CircularCut">

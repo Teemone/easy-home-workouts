@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workitout.databinding.WorkoutHistoryListItemBinding
 import com.example.workitout.db.tables.WorkoutHistoryEntity
-import java.text.NumberFormat
 import java.time.LocalDate
-import kotlin.math.floor
 
 class WorkoutHistoryAdapter:
     ListAdapter<WorkoutHistoryEntity, WorkoutHistoryAdapter.ViewHolder>(DiffCallback) {
