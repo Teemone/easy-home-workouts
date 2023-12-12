@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="?attr/backgroundColor"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/backgroundColor"
+            android:id="@+id/appBarLayout"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/homeToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                style="@style/ToolBar"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/mChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="@dimen/parent_padding_10"
+            app:layout_constraintEnd_toEndOf="@id/appBarLayout"
+            app:layout_constraintStart_toStartOf="@id/appBarLayout"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Chip"
+                android:id="@+id/dashboardChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Dashboard" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/workoutsChip"
+                style="@style/Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Workouts" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/materialDivider"
+            app:layout_constraintTop_toBottomOf="@+id/mChipGroup"
+            app:navGraph="@navigation/nav_graph"
+            tools:context=".ui.HomeFragment" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/materialDivider"
+            app:layout_constraintStart_toStartOf="@id/bnv"
+            app:layout_constraintEnd_toEndOf="@id/bnv"
+            app:layout_constraintBottom_toTopOf="@id/bnv"
+            />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv"
+            style="@style/BottomNavBar"
+            app:labelVisibilityMode="labeled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemTextAppearanceActive="@style/BottomNavBarTextActive"
+            app:itemTextAppearanceInactive="@style/BottomNavBarTextInactive"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/bottom_nav_menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+
+

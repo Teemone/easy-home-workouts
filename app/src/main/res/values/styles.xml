@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CircularCut" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">12dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="RoundCut" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="Theme.WorkoutApp.ChipTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/poppins_reg</item>
+    </style>
+
+    <style name="Theme.WorkoutApp.CalenderWeekDayText" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.WorkoutApp.SettingsText" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--    Bottom Navigation View Text Inactive-->
+    <style name="BottomNavBarTextInactive" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!--    Bottom Navigation View Text Inactive-->
+    <style name="BottomNavBarTextActive" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="Theme.WorkoutApp.ToolbarTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/poppins_reg</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.WorkoutApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">17sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:fontFamily">@font/poppins_reg</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingExtra">0dp</item>
+    </style>
+
+    <style name="BevelCut" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="chipCornerRadius">8dp</item>
+        <item name="cornerFamily">cut</item>
+    </style>
+
+    <style name="Chip.TextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/poppins_light</item>
+    </style>
+
+<!--    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">-->
+<!--        <item name="shapeAppearanceOverlay">@style/BevelCut</item>-->
+<!--        <item name="android:layout_margin">0dp</item>-->
+<!--        <item name="android:textAppearance">@style/Chip.TextAppearance</item>-->
+<!--        <item name="chipStrokeWidth">0.5dp</item>-->
+<!--        <item name="chipStrokeColor">?colorPrimary</item>-->
+<!--        <item name="chipBackgroundColor">?backgroundColor</item>-->
+<!--        <item name="android:elevation">2dp</item>-->
+<!--        <item name="android:clickable">false</item>-->
+<!--        <item name="android:focusable">false</item>-->
+<!--        <item name="android:checkable">false</item>-->
+<!--        <item name="android:textColor">?colorOnBackground</item>-->
+
+<!--    </style>-->
+
+</resources>

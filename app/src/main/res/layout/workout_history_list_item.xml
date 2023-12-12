@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:selectableItemBackground"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/tvWorkoutName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Kettleball flip" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tvWorkoutName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvWorkoutName"
+            tools:text="22-10-2022" />
+
+        <TextView
+            android:id="@+id/tvCompletion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
+            app:layout_constraintStart_toStartOf="@id/tvWorkoutName"
+            app:layout_constraintTop_toBottomOf="@id/tvWorkoutName"
+            android:text="@string/completion" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvCompletion"
+            app:layout_constraintTop_toBottomOf="@id/tvCompletion"
+            android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
+            android:text="@string/status" />
+
+        <TextView
+            android:id="@+id/tvCompletionValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            app:layout_constraintEnd_toEndOf="@id/tvDate"
+            tools:text="75%" />
+
+        <TextView
+            android:id="@+id/tvStatusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvCompletionValue"
+            app:layout_constraintEnd_toEndOf="@id/tvCompletionValue"
+            tools:text="@string/complete" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

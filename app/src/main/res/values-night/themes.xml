@@ -1,0 +1,62 @@
+<resources >
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WorkItOut" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_purple</item>
+        <item name="colorPrimaryVariant">@color/purple</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="backgroundColor">@color/deep_purple</item>
+        <item name="colorOnBackground">@color/light_gray</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/purple</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorAccent">@color/purple</item>
+        <item name="android:fontFamily">@font/poppins_reg</item>
+        <item name="android:navigationBarColor">?attr/backgroundColor</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+<!--    CardView-->
+    <style name="Theme.WorkoutApp.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?attr/backgroundColor</item>
+        <item name="cardElevation">3.5dp</item>
+    </style>
+
+<!--    CircularProgressIndicator-->
+    <style name="Theme.WorkoutApp.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="trackColor">#1A000000</item>
+        <item name="trackThickness">2.5dp</item>
+        <item name="indicatorSize">50dp</item>
+    </style>
+
+    <!--    Bottom Navigation View-->
+    <style name="BottomNavBar" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="itemTextColor">@color/bottom_nav_bar_item_color</item>
+        <item name="itemIconTint">@color/bottom_nav_bar_item_color</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:background">?backgroundColor</item>
+    </style>
+
+    <style name="SkipIconColor">
+        <item name="tint">@color/light_gray</item>
+    </style>
+
+    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="shapeAppearance">@style/RoundCut</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+        <item name="android:textAppearance">@style/Theme.WorkoutApp.ChipTextAppearance</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="chipStrokeColor">?attr/colorPrimary</item>
+        <item name="chipBackgroundColor">@color/chip_checked_state</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="chipStartPadding">@dimen/parent_padding_10</item>
+        <item name="chipEndPadding">@dimen/parent_padding_10</item>
+    </style>
+
+</resources>
