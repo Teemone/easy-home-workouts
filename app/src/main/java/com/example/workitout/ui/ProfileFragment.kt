@@ -13,6 +13,13 @@ import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
 
+/*
+Todo:
+ 1. Remove 'settings' option from general settings tab
+ 2. Add dark mode switch to general settings tab
+ 3. Add option to change measurement unit (metric or imperial) -- subject to change
+ */
+
 class ProfileFragment : Fragment() {
     private val sharedViewModel: CustomViewModel by activityViewModels{
         CustomViewModelFactory(
