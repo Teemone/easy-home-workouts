@@ -30,6 +30,8 @@
     <string name="workout_schedule">Workout schedule</string>
     <string name="plan">Plan</string>
     <string name="settings">Settings</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="measurement_unit">Measurement unit</string>
     <string name="stat">Statistics</string>
     <string name="library">Library</string>
     <string name="profile">Profile</string>
