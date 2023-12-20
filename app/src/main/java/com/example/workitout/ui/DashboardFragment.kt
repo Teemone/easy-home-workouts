@@ -4,23 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.workitout.R
-import com.example.workitout.adapters.CalenderAdapter
 import com.example.workitout.databinding.FragmentDashboardBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 
 class DashboardFragment : Fragment() {
     private val sharedViewModel: CustomViewModel by activityViewModels{
@@ -32,11 +26,6 @@ class DashboardFragment : Fragment() {
         )
     }
     private var viewPager: ViewPager2? = null
-    private var monthYearText: TextView? = null
-    private var calendarRecyclerView: RecyclerView? = null
-    private var selectedDate: LocalDate? = null
-
-
     private var binding: FragmentDashboardBinding? = null
 
     override fun onCreateView(
@@ -50,12 +39,6 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewPager = sharedViewModel.viewPager2.value
-
-
-        initWidgets()
-        selectedDate = LocalDate.now()
-        setMonthView()
-        handleCalenderPreviousNextMonth()
 
         childFragmentManager.commit {
             setReorderingAllowed(true)
@@ -128,64 +111,6 @@ class DashboardFragment : Fragment() {
 
         }
 
-
-
-    }
-
-    private fun initWidgets() {
-        calendarRecyclerView = binding?.calendarRecyclerView
-        monthYearText = binding?.monthYearTV
-    }
-
-    private fun setMonthView() {
-        monthYearText?.text = selectedDate?.let { monthYearFromDate(it) }
-        val daysInMonth = selectedDate?.let { daysInMonthArray(it) }
-        val calendarAdapter = daysInMonth?.let { CalenderAdapter(it) }
-        calendarRecyclerView?.adapter = calendarAdapter
-    }
-
-    private fun daysInMonthArray(date: LocalDate): ArrayList<String> {
-        val daysInMonthArray = ArrayList<String>()
-        val yearMonth = YearMonth.from(date)
-        val daysInMonth = yearMonth.lengthOfMonth()
-        val firstOfMonth: LocalDate? = selectedDate?.withDayOfMonth(1)
-        val dayOfWeek = firstOfMonth?.dayOfWeek?.value
-
-        for (i in 1..42) {
-            if (i <= dayOfWeek!! || i > daysInMonth + dayOfWeek) {
-                daysInMonthArray.add("")
-            } else {
-                daysInMonthArray.add((i - dayOfWeek).toString())
-            }
-        }
-
-        return daysInMonthArray
-    }
-
-    private fun monthYearFromDate(date: LocalDate): String? {
-        val formatter = DateTimeFormatter.ofPattern("MMMM yyyy")
-        return date.format(formatter)
-    }
-
-    private fun previousMonthAction(view: View?) {
-        selectedDate = selectedDate?.minusMonths(1)
-        setMonthView()
-    }
-
-    private fun nextMonthAction(view: View?) {
-        selectedDate = selectedDate?.plusMonths(1)
-        setMonthView()
-    }
-
-    private fun handleCalenderPreviousNextMonth(){
-        binding?.apply {
-            previousMonth.setOnClickListener {
-                previousMonthAction(it)
-            }
-            nextMonth.setOnClickListener {
-                nextMonthAction(it)
-            }
-        }
     }
 
     override fun onDestroy() {
