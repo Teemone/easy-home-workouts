@@ -1,10 +1,11 @@
 package com.example.workitout.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.workitout.R
@@ -36,6 +37,21 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.llWorkoutHistory.setOnClickListener {
             view.findNavController().navigate(R.id.historyFragment)
+        }
+
+        binding.switchDarkMode.setOnCheckedChangeListener { switch, isChecked ->
+
+        }
+
+        setSwitchCurrentCheckedState()
+    }
+
+    private fun setSwitchCurrentCheckedState(){
+        val isNightMode = AppCompatDelegate.getDefaultNightMode()
+
+        when (isNightMode){
+            AppCompatDelegate.MODE_NIGHT_NO -> {binding.switchDarkMode.isChecked = false}
+            AppCompatDelegate.MODE_NIGHT_YES -> binding.switchDarkMode.isChecked = true
         }
     }
 
