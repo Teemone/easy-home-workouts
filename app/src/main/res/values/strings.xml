@@ -70,4 +70,8 @@
     <string name="today_">Today, %s</string>
     <string name="yesterday_">Yesterday, %s</string>
     <string name="no_previous_workout_yet">No previous workout yet</string>
+    <string name="use_device_settings">Use device settings</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="dark_mode_setting">Dark mode setting</string>
 </resources>
