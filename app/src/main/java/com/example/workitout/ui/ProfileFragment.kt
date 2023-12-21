@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.workitout.R
+import com.example.workitout.databinding.BottomSheetDialogBinding
 import com.example.workitout.databinding.FragmentProfileBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 /*
 Todo:
@@ -46,19 +48,32 @@ class ProfileFragment : Fragment() {
             view.findNavController().navigate(R.id.historyFragment)
         }
 
-        binding.switchDarkMode.setOnCheckedChangeListener { switch, isChecked ->
+        binding.clDarkMode.setOnClickListener {
+            showModalBottomSheet()
+        }
+
+
+        setSwitchCurrentCheckedState()
+    }
+
+    private fun showModalBottomSheet() {
+        val mbs = BottomSheetDialog(requireContext())
+        val mbsBinding = BottomSheetDialogBinding.inflate(layoutInflater)
+        mbs.setContentView(mbsBinding.root)
+
+        mbsBinding.apply {
 
         }
 
-        setSwitchCurrentCheckedState()
+        mbs.show()
     }
 
     private fun setSwitchCurrentCheckedState(){
         val isNightMode = AppCompatDelegate.getDefaultNightMode()
 
         when (isNightMode){
-            AppCompatDelegate.MODE_NIGHT_NO -> {binding.switchDarkMode.isChecked = false}
-            AppCompatDelegate.MODE_NIGHT_YES -> binding.switchDarkMode.isChecked = true
+//            AppCompatDelegate.MODE_NIGHT_NO -> {binding.switchDarkMode.isChecked = false}
+//            AppCompatDelegate.MODE_NIGHT_YES -> binding.switchDarkMode.isChecked = true
         }
     }
 
