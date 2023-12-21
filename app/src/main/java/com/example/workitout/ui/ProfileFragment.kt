@@ -18,9 +18,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 /*
 Todo:
- 1. Remove 'settings' option from general settings tab
- 2. Add dark mode switch to general settings tab
- 3. Add option to change measurement unit (metric or imperial) -- subject to change
+ 1. Fix improper behaviour when theme is changed to light mode
+ 2. Fix wrong appbar title after config change
  */
 
 class ProfileFragment : Fragment() {
@@ -52,29 +51,69 @@ class ProfileFragment : Fragment() {
             showModalBottomSheet()
         }
 
-
-        setSwitchCurrentCheckedState()
     }
 
     private fun showModalBottomSheet() {
         val mbs = BottomSheetDialog(requireContext())
         val mbsBinding = BottomSheetDialogBinding.inflate(layoutInflater)
+        val rbLight = mbsBinding.rbLight
+        val rbDark = mbsBinding.rbDark
+        val rbSystemDefault = mbsBinding.rbSystemDefault
         mbs.setContentView(mbsBinding.root)
 
         mbsBinding.apply {
+            rbDark.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbLight.isChecked = false
+                    rbSystemDefault.isChecked = false
 
+                    changeTheme(true)
+                }
+
+
+            }
+
+            rbLight.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbDark.isChecked = false
+                    rbSystemDefault.isChecked = false
+
+                    changeTheme(false)
+                }
+            }
+
+            rbSystemDefault.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbLight.isChecked = false
+                    rbDark.isChecked = false
+
+                    changeTheme(null)
+                }
+
+            }
         }
 
         mbs.show()
     }
 
-    private fun setSwitchCurrentCheckedState(){
-        val isNightMode = AppCompatDelegate.getDefaultNightMode()
-
-        when (isNightMode){
-//            AppCompatDelegate.MODE_NIGHT_NO -> {binding.switchDarkMode.isChecked = false}
-//            AppCompatDelegate.MODE_NIGHT_YES -> binding.switchDarkMode.isChecked = true
+    private fun changeTheme(toDarkTheme: Boolean?){
+        if (toDarkTheme == true){
+            AppCompatDelegate.MODE_NIGHT_YES.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
         }
+        else if (toDarkTheme == false){
+            AppCompatDelegate.MODE_NIGHT_NO.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        sharedViewModel.toolbar.value?.title = getString(R.string.more)
+
     }
 
 }
