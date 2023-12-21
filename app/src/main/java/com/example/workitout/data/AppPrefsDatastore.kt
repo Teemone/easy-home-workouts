@@ -29,6 +29,9 @@ class AppPrefsDatastore (private val context: Context) {
     private val exerciseIsCompleted = booleanPreferencesKey("exerciseIsCompleted")
     val getExerciseIsCompleted = context.datastore.data.map { prefs -> prefs[exerciseIsCompleted] }
 
+    private val isNightMode = booleanPreferencesKey("isNightMode")
+    val getIsNightMode = context.datastore.data.map { prefs -> prefs[isNightMode] }
+
     private val currentExerciseId = intPreferencesKey("currentExerciseId")
     val getCurrentExerciseId = context.datastore.data.map { prefs -> prefs[currentExerciseId] ?: 0 }
 
@@ -67,5 +70,11 @@ class AppPrefsDatastore (private val context: Context) {
         context.datastore.edit {
                 prefs ->
             prefs[currentExerciseId] = id
+        }
+
+    suspend fun setIsNightMode(isNight: Boolean) =
+        context.datastore.edit {
+                prefs ->
+            prefs[isNightMode] = isNight
         }
 }
