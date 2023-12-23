@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.WorkItOut" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.WorkItOut" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/purple</item>
         <item name="colorPrimaryVariant">@color/dark_purple</item>
@@ -13,6 +13,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorAccent">@color/light_purple</item>
         <item name="android:navigationBarColor">?attr/backgroundColor</item>
+        <item name="android:windowBackground">?attr/backgroundColor</item>
 
         <item name="android:fontFamily">@font/poppins_reg</item>
 

@@ -1,5 +1,6 @@
 package com.example.workitout.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
     }
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private var currentDeviceThemeIsDark: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +45,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        currentDeviceThemeIsDark = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
         binding.llWorkoutHistory.setOnClickListener {
             view.findNavController().navigate(R.id.historyFragment)
         }
@@ -50,6 +54,8 @@ class ProfileFragment : Fragment() {
         binding.clDarkMode.setOnClickListener {
             showModalBottomSheet()
         }
+
+
 
     }
 
@@ -62,6 +68,12 @@ class ProfileFragment : Fragment() {
         mbs.setContentView(mbsBinding.root)
 
         mbsBinding.apply {
+
+            when(currentDeviceThemeIsDark){
+                Configuration.UI_MODE_NIGHT_NO -> rbLight.isChecked = true
+                Configuration.UI_MODE_NIGHT_YES -> rbDark.isChecked = true
+            }
+
             rbDark.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
                     rbLight.isChecked = false
@@ -69,7 +81,6 @@ class ProfileFragment : Fragment() {
 
                     changeTheme(true)
                 }
-
 
             }
 
@@ -98,6 +109,7 @@ class ProfileFragment : Fragment() {
 
     private fun changeTheme(toDarkTheme: Boolean?){
         if (toDarkTheme == true){
+
             AppCompatDelegate.MODE_NIGHT_YES.let {
                 AppCompatDelegate.setDefaultNightMode(it)
             }
@@ -113,7 +125,6 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         sharedViewModel.toolbar.value?.title = getString(R.string.more)
-
     }
 
 }

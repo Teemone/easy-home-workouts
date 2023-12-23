@@ -80,13 +80,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.libraryFragment -> {
-                        toolbar.title = getString(R.string.library)
                         toolbar.navigationIcon = null
                         hideHeaderChipGroup()
                     }
 
                     R.id.profileFragment -> {
-                        toolbar.title = getString(R.string.more)
                         toolbar.navigationIcon = null
                         hideHeaderChipGroup()
                     }
