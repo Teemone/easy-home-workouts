@@ -2,4 +2,5 @@
 <resources>
     <dimen name="parent_padding_10">10dp</dimen>
     <dimen name="settings_text_body">16sp</dimen>
+    <dimen name="m10">10dp</dimen>
 </resources>

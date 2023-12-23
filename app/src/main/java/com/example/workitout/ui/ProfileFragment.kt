@@ -1,5 +1,6 @@
 package com.example.workitout.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.workitout.R
+import com.example.workitout.databinding.BottomSheetDialogBinding
 import com.example.workitout.databinding.FragmentProfileBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 /*
 Todo:
- 1. Remove 'settings' option from general settings tab
- 2. Add dark mode switch to general settings tab
- 3. Add option to change measurement unit (metric or imperial) -- subject to change
+ 1. Fix improper behaviour when theme is changed to light mode
+ 2. Fix wrong appbar title after config change
  */
 
 class ProfileFragment : Fragment() {
@@ -32,6 +34,7 @@ class ProfileFragment : Fragment() {
     }
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private var currentDeviceThemeIsDark: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,24 +45,86 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        currentDeviceThemeIsDark = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
         binding.llWorkoutHistory.setOnClickListener {
             view.findNavController().navigate(R.id.historyFragment)
         }
 
-        binding.switchDarkMode.setOnCheckedChangeListener { switch, isChecked ->
-
+        binding.clDarkMode.setOnClickListener {
+            showModalBottomSheet()
         }
 
-        setSwitchCurrentCheckedState()
+
+
     }
 
-    private fun setSwitchCurrentCheckedState(){
-        val isNightMode = AppCompatDelegate.getDefaultNightMode()
+    private fun showModalBottomSheet() {
+        val mbs = BottomSheetDialog(requireContext())
+        val mbsBinding = BottomSheetDialogBinding.inflate(layoutInflater)
+        val rbLight = mbsBinding.rbLight
+        val rbDark = mbsBinding.rbDark
+        val rbSystemDefault = mbsBinding.rbSystemDefault
+        mbs.setContentView(mbsBinding.root)
 
-        when (isNightMode){
-            AppCompatDelegate.MODE_NIGHT_NO -> {binding.switchDarkMode.isChecked = false}
-            AppCompatDelegate.MODE_NIGHT_YES -> binding.switchDarkMode.isChecked = true
+        mbsBinding.apply {
+
+            when(currentDeviceThemeIsDark){
+                Configuration.UI_MODE_NIGHT_NO -> rbLight.isChecked = true
+                Configuration.UI_MODE_NIGHT_YES -> rbDark.isChecked = true
+            }
+
+            rbDark.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbLight.isChecked = false
+                    rbSystemDefault.isChecked = false
+
+                    changeTheme(true)
+                }
+
+            }
+
+            rbLight.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbDark.isChecked = false
+                    rbSystemDefault.isChecked = false
+
+                    changeTheme(false)
+                }
+            }
+
+            rbSystemDefault.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    rbLight.isChecked = false
+                    rbDark.isChecked = false
+
+                    changeTheme(currentDeviceThemeIsDark == Configuration.UI_MODE_NIGHT_YES)
+                }
+
+            }
         }
+
+        mbs.show()
+    }
+
+    private fun changeTheme(toDarkTheme: Boolean?){
+        if (toDarkTheme == true){
+
+            AppCompatDelegate.MODE_NIGHT_YES.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
+        }
+        else if (toDarkTheme == false){
+            AppCompatDelegate.MODE_NIGHT_NO.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        sharedViewModel.toolbar.value?.title = getString(R.string.more)
     }
 
 }

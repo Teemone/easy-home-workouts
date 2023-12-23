@@ -14,6 +14,8 @@
         <item name="colorAccent">@color/purple</item>
         <item name="android:fontFamily">@font/poppins_reg</item>
         <item name="android:navigationBarColor">?attr/backgroundColor</item>
+        <item name="android:windowBackground">?attr/backgroundColor</item>
+
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/backgroundColor</item>
@@ -58,5 +60,8 @@
         <item name="chipStartPadding">@dimen/parent_padding_10</item>
         <item name="chipEndPadding">@dimen/parent_padding_10</item>
     </style>
+
+    <style name="Theme.WorkItOut" parent="Base.Theme.WorkItOut" />
+
 
 </resources>

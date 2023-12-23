@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -11,16 +13,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/personal"
-            android:textColor="?attr/colorPrimary"
-            />
+            android:textColor="?attr/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,9 +44,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:layout_marginStart="15dp"
                     android:text="@string/my_information"
                     android:textSize="@dimen/settings_text_body" />
 
@@ -53,23 +54,23 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/llWorkoutHistory"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="?android:selectableItemBackground"
                 android:clickable="true"
-                android:id="@+id/llWorkoutHistory"
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -86,9 +87,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:layout_marginStart="15dp"
                     android:text="@string/workout_history"
                     android:textSize="@dimen/settings_text_body" />
 
@@ -96,9 +97,9 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 
@@ -106,69 +107,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/general"
-            android:textColor="?attr/colorPrimary"
-            />
+            android:textColor="?attr/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clDarkMode"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/m10">
 
                 <TextView
+                    android:id="@+id/tvDarkMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:id="@+id/tvDarkMode"
-                    android:drawablePadding="12dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="15dp"
                     android:text="@string/dark_mode"
                     android:textSize="@dimen/settings_text_body"
+                    app:drawableStartCompat="@drawable/outline_bedtime_24"
                     app:drawableTint="?colorPrimary"
-                    app:drawableStartCompat="@drawable/outline_bedtime_24" />
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintTop_toTopOf="@id/tvDarkMode"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/tvDarkMode"
-                    android:id="@+id/switchDarkMode"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/llMeausrementUnit"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="?android:selectableItemBackground"
-                android:id="@+id/llMeausrementUnit"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -186,9 +181,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:layout_marginStart="15dp"
                     android:text="@string/measurement_unit"
                     android:textSize="@dimen/settings_text_body" />
 
@@ -196,16 +191,16 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,9 +223,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:layout_marginStart="15dp"
                     android:text="@string/leave_a_rating"
                     android:textSize="@dimen/settings_text_body" />
 
@@ -238,16 +233,16 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -264,15 +259,14 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/twitter"
-                    />
+                    android:src="@drawable/twitter" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:layout_marginStart="15dp"
                     android:text="@string/follow_on_x"
                     android:textSize="@dimen/settings_text_body" />
 
@@ -280,9 +274,9 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
 

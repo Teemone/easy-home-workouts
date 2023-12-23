@@ -57,19 +57,4 @@
         <item name="fontFamily">@font/poppins_light</item>
     </style>
 
-<!--    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">-->
-<!--        <item name="shapeAppearanceOverlay">@style/BevelCut</item>-->
-<!--        <item name="android:layout_margin">0dp</item>-->
-<!--        <item name="android:textAppearance">@style/Chip.TextAppearance</item>-->
-<!--        <item name="chipStrokeWidth">0.5dp</item>-->
-<!--        <item name="chipStrokeColor">?colorPrimary</item>-->
-<!--        <item name="chipBackgroundColor">?backgroundColor</item>-->
-<!--        <item name="android:elevation">2dp</item>-->
-<!--        <item name="android:clickable">false</item>-->
-<!--        <item name="android:focusable">false</item>-->
-<!--        <item name="android:checkable">false</item>-->
-<!--        <item name="android:textColor">?colorOnBackground</item>-->
-
-<!--    </style>-->
-
 </resources>
