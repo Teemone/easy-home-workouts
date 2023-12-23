@@ -98,7 +98,7 @@ class ProfileFragment : Fragment() {
                     rbLight.isChecked = false
                     rbDark.isChecked = false
 
-                    changeTheme(null)
+                    changeTheme(currentDeviceThemeIsDark == Configuration.UI_MODE_NIGHT_YES)
                 }
 
             }

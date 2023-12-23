@@ -145,6 +145,8 @@ class CustomViewModel(
         }
     }
 
+
+
     private fun setExerciseIsCompletedFlow(isCompleted: Boolean){
         _exerciseIsCompletedFlow.value = isCompleted
     }
