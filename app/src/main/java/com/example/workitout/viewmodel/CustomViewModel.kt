@@ -45,9 +45,6 @@ class CustomViewModel(
     private var _bottomNavView = MutableLiveData<BottomNavigationView>()
     val bottomNavView: LiveData<BottomNavigationView> = _bottomNavView
 
-//    private var _current_exerciseId = MutableLiveData<Int>()
-//    val current_exerciseId: LiveData<Int> = _current_exerciseId
-
     private var _workoutInfoFlow = MutableStateFlow<List<WorkoutInfoEntity>>(listOf())
     val workoutInfoFlow: StateFlow<List<WorkoutInfoEntity>> = _workoutInfoFlow
 
@@ -70,9 +67,11 @@ class CustomViewModel(
 
 
 
-
-
-    ////////// DB QUERIES //////////
+    /*
+     START
+     OF
+     DB-QUERIES
+      */
 
     private fun getAllWorkoutInfo(){
         viewModelScope.launch {
@@ -123,61 +122,19 @@ class CustomViewModel(
         }
     }
 
-    ////////// END DB QUERIES //////////
-
-    private fun progress(exercises: Exercises, timeLeft: Int): Double{
-        val duration = exercises.durationAsInt()
-        return (1 - timeLeft.toDouble()/duration.toDouble()) * 100
-    }
-
-    fun setTimeLeftForCurrentWorkout(timeLeft: Int, context: Context, exercise: Exercises){
-        datastore = AppPrefsDatastore(context)
-        val progress = progress(exercise, timeLeft)
-        val exerciseIsCompleted = progress.equals(100.0)
-
-        viewModelScope.launch {
-            datastore.apply {
-                setTimeLeftForCurrentWorkout(timeLeft)
-                setExerciseProgress(progress)
-                setExerciseIsCompleted(exerciseIsCompleted)
-            }
-            setExerciseIsCompletedFlow(exerciseIsCompleted)
-        }
-    }
+    /*
+    END
+    OF
+    DB-QUERIES
+     */
 
 
 
-    private fun setExerciseIsCompletedFlow(isCompleted: Boolean){
-        _exerciseIsCompletedFlow.value = isCompleted
-    }
-
-    fun setCurrentExerciseId(context: Context, id: Int){
-        datastore = AppPrefsDatastore(context)
-
-        viewModelScope.launch {
-            datastore.setCurrentExerciseId(id)
-        }
-    }
-
-    fun setWorkoutInfoAddedToDb(context: Context, isAdded: Boolean){
-        datastore = AppPrefsDatastore(context)
-
-        viewModelScope.launch {
-            datastore.setWorkoutInfoAddedToDb(isAdded)
-        }
-
-    }
-
-    fun getCompletedExercisesId(context: Context): LiveData<Set<String>> {
-        datastore = AppPrefsDatastore(context)
-        return datastore.getCompletedExercisesId.asLiveData()
-    }
-
-    fun getTimeLeftForCurrentWorkout(context: Context): LiveData<Int> {
-        datastore = AppPrefsDatastore(context)
-        return datastore.getTimeLeftForCurrentWorkout.asLiveData()
-    }
-
+    /*
+    START
+    OF
+    GETTERS
+     */
 
     fun getExerciseProgress(context: Context): LiveData<Double> {
         datastore = AppPrefsDatastore(context)
@@ -203,24 +160,6 @@ class CustomViewModel(
 
     }
 
-    fun setViewPager(vp: ViewPager2){
-        _viewPager2.value = vp
-    }
-
-    fun setToolbar(tb: Toolbar){
-        _toolbar.value = tb
-    }
-
-    fun setBnv(bnv: BottomNavigationView){
-        _bottomNavView.value = bnv
-    }
-
-    fun appendZero(value: Int): String{
-        if (value<10)
-            return "0$value"
-        return value.toString()
-    }
-
     fun getCountdown(timeMillis: Long): Flow<Int> {
         var tSecs = (timeMillis/1000).toInt()
         _countdownState.value = TimerState.RUNNING
@@ -235,6 +174,84 @@ class CustomViewModel(
             }
             _countdownState.value = TimerState.FINISHED
         }
+    }
+
+    /*
+    END
+    OF
+    GETTERS
+     */
+
+    /*
+    START
+    OF
+    SETTERS
+     */
+
+    fun setViewPager(vp: ViewPager2){
+        _viewPager2.value = vp
+    }
+
+    fun setToolbar(tb: Toolbar){
+        _toolbar.value = tb
+    }
+
+    fun setBnv(bnv: BottomNavigationView){
+        _bottomNavView.value = bnv
+    }
+
+    fun setTimeLeftForCurrentWorkout(timeLeft: Int, context: Context, exercise: Exercises){
+        datastore = AppPrefsDatastore(context)
+        val progress = progress(exercise, timeLeft)
+        val exerciseIsCompleted = progress.equals(100.0)
+
+        viewModelScope.launch {
+            datastore.apply {
+                setTimeLeftForCurrentWorkout(timeLeft)
+                setExerciseProgress(progress)
+                setExerciseIsCompleted(exerciseIsCompleted)
+            }
+            setExerciseIsCompletedFlow(exerciseIsCompleted)
+        }
+    }
+
+    private fun setExerciseIsCompletedFlow(isCompleted: Boolean){
+        _exerciseIsCompletedFlow.value = isCompleted
+    }
+
+    fun setCurrentExerciseId(context: Context, id: Int){
+        datastore = AppPrefsDatastore(context)
+
+        viewModelScope.launch {
+            datastore.setCurrentExerciseId(id)
+        }
+    }
+
+    fun setWorkoutInfoAddedToDb(context: Context, isAdded: Boolean){
+        datastore = AppPrefsDatastore(context)
+
+        viewModelScope.launch {
+            datastore.setWorkoutInfoAddedToDb(isAdded)
+        }
+
+    }
+
+    /*
+    START
+    OF
+    SETTERS
+     */
+
+
+    private fun progress(exercises: Exercises, timeLeft: Int): Double{
+        val duration = exercises.durationAsInt()
+        return (1 - timeLeft.toDouble()/duration.toDouble()) * 100
+    }
+
+    fun appendZero(value: Int): String{
+        if (value<10)
+            return "0$value"
+        return value.toString()
     }
 
     enum class TimerState {
