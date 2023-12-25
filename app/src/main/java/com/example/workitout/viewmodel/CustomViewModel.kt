@@ -24,6 +24,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
@@ -47,6 +48,9 @@ class CustomViewModel(
 
     private var _workoutHistoryFlow = MutableStateFlow<List<WorkoutHistoryEntity>>(listOf())
     val workoutHistoryFlow: StateFlow<List<WorkoutHistoryEntity>> = _workoutHistoryFlow
+
+    private var _getFollowSysDefFlow = MutableStateFlow(true)
+    val getFollowSysDefFlow = _getFollowSysDefFlow.asStateFlow()
 
     private var _exerciseIsCompletedFlow = MutableStateFlow(false)
     val exerciseIsCompletedFlow: StateFlow<Boolean> = _exerciseIsCompletedFlow
@@ -161,6 +165,11 @@ class CustomViewModel(
         return datastore.getIsNightMode
     }
 
+    fun getFollowsSysDef(context: Context): Flow<Boolean?>{
+        datastore = AppPrefsDatastore(context)
+        return datastore.getFollowsSysDef
+    }
+
     fun getCountdown(timeMillis: Long): Flow<Int> {
         var tSecs = (timeMillis/1000).toInt()
         _countdownState.value = TimerState.RUNNING
@@ -219,6 +228,10 @@ class CustomViewModel(
         _exerciseIsCompletedFlow.value = isCompleted
     }
 
+    fun setFollowSysDefFlow(followSysDef: Boolean){
+        _getFollowSysDefFlow.value = followSysDef
+    }
+
     fun setCurrentExerciseId(context: Context, id: Int){
         datastore = AppPrefsDatastore(context)
 
@@ -238,8 +251,16 @@ class CustomViewModel(
     fun setIsNightMode(context: Context, isNightMode: Boolean){
         datastore = AppPrefsDatastore(context)
 
-        viewModelScope.launch {
+        viewModelScope.launch (Dispatchers.Default){
             datastore.setIsNightMode(isNightMode)
+        }
+    }
+
+    fun setFollowsSysDef(context: Context, followsSysDef: Boolean){
+        datastore = AppPrefsDatastore(context)
+
+        viewModelScope.launch (Dispatchers.Default) {
+            datastore.setFollowsSysDef(followsSysDef)
         }
     }
 

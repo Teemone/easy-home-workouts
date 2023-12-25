@@ -28,13 +28,14 @@ class AppPrefsDatastore (private val context: Context) {
     private val isNightMode = booleanPreferencesKey("isNightMode")
     val getIsNightMode = context.datastore.data.map { prefs -> prefs[isNightMode]  }
 
+    private val followsSysDef = booleanPreferencesKey("followsSysDef")
+    val getFollowsSysDef = context.datastore.data.map { prefs -> prefs[followsSysDef] ?: true }
+
     private val currentExerciseId = intPreferencesKey("currentExerciseId")
     val getCurrentExerciseId = context.datastore.data.map { prefs -> prefs[currentExerciseId] ?: 0 }
 
     private val workoutInfoAddedToDb = booleanPreferencesKey("workoutInfoAddedToDb")
     val getWorkoutInfoAddedToDb = context.datastore.data.map { prefs -> prefs[workoutInfoAddedToDb] ?: false }
-
-
 
 
 
@@ -75,5 +76,11 @@ class AppPrefsDatastore (private val context: Context) {
                 prefs[isNightMode] = isNight
             }
 
+        }
+
+    suspend fun setFollowsSysDef(followsSys: Boolean) =
+        context.datastore.edit {
+                prefs ->
+            prefs[followsSysDef] = followsSys
         }
 }

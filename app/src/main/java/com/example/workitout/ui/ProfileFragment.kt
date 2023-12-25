@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.workitout.R
 import com.example.workitout.databinding.BottomSheetDialogBinding
@@ -16,6 +17,7 @@ import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.launch
 
 /*
 Todo:
@@ -68,11 +70,21 @@ class ProfileFragment : Fragment() {
         mbs.setContentView(mbsBinding.root)
 
         mbsBinding.apply {
-
-            when(currentDeviceThemeIsDark){
-                Configuration.UI_MODE_NIGHT_NO -> rbLight.isChecked = true
-                Configuration.UI_MODE_NIGHT_YES -> rbDark.isChecked = true
+            lifecycleScope.launch {
+                sharedViewModel.getFollowsSysDef(requireContext()).collect{
+                    it?.let{
+                        if (it){
+                            rbSystemDefault.isChecked = true
+                        }else{
+                            when(currentDeviceThemeIsDark){
+                                Configuration.UI_MODE_NIGHT_NO -> rbLight.isChecked = true
+                                Configuration.UI_MODE_NIGHT_YES -> rbDark.isChecked = true
+                            }
+                        }
+                    }
+                }
             }
+
 
             rbDark.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
@@ -124,6 +136,7 @@ class ProfileFragment : Fragment() {
             }
 
             sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+            sharedViewModel.setFollowsSysDef(requireContext(), false)
 
         }
         else if (toDarkTheme == false){
@@ -132,8 +145,11 @@ class ProfileFragment : Fragment() {
             }
 
             sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+            sharedViewModel.setFollowsSysDef(requireContext(), false)
 
         }
+        else
+            sharedViewModel.setFollowsSysDef(requireContext(), true)
 
     }
 

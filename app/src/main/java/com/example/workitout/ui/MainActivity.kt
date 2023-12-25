@@ -135,14 +135,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun verifyPrefs(){
         lifecycleScope.launch {
-            sharedViewModel.getIsNightMode(this@MainActivity).collect{
-                isNight ->
-                isNight?.let {
-                    changeTheme(isNight)
-                    Log.i("MAINACTIVITY DUMP", "Night mode is $isNight")
-                }
 
+            sharedViewModel.getFollowsSysDef(this@MainActivity).collect{
+                it?.let {
+                    if(!it){
+                        sharedViewModel.getIsNightMode(this@MainActivity).collect{
+                                isNight ->
+                            if (isNight != null){
+                                changeTheme(isNight)
+                                Log.i("MAINACTIVITY DUMP", "Night mode is $isNight")
+                            }
+                        }
+                    }
+                    Log.i("GET FOLLOW SYS DEF DUMP", "FOLLOW SYS DEF is $it")
+
+                }
             }
+
+
         }
     }
 
