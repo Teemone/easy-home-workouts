@@ -143,12 +143,9 @@ class MainActivity : AppCompatActivity() {
                                 isNight ->
                             if (isNight != null){
                                 changeTheme(isNight)
-                                Log.i("MAINACTIVITY DUMP", "Night mode is $isNight")
                             }
                         }
                     }
-                    Log.i("GET FOLLOW SYS DEF DUMP", "FOLLOW SYS DEF is $it")
-
                 }
             }
 

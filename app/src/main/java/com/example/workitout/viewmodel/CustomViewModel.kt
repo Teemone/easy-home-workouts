@@ -92,7 +92,6 @@ class CustomViewModel(
         viewModelScope.launch {
             try {
                 workoutHistoryDao.insert(historyItem)
-                Log.i(TAG, "Insert successful")
             }catch (e: Exception){
                 e.printStackTrace()
             }

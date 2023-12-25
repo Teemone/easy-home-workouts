@@ -19,11 +19,6 @@ import com.example.workitout.viewmodel.CustomViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
-/*
-Todo:
- 1. Fix improper behaviour when theme is changed to light mode
- 2. Fix wrong appbar title after config change
- */
 
 class ProfileFragment : Fragment() {
     private val sharedViewModel: CustomViewModel by activityViewModels{
@@ -56,8 +51,6 @@ class ProfileFragment : Fragment() {
         binding.clDarkMode.setOnClickListener {
             showModalBottomSheet()
         }
-
-
 
     }
 
