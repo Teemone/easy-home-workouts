@@ -2,8 +2,10 @@ package com.example.workitout.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -99,6 +101,8 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel.setToolbar(toolbar)
         sharedViewModel.setBnv(bottomNavView)
 
+        verifyPrefs()
+
         lifecycleScope.launch {
             sharedViewModel.getWorkoutInfoAddedToDb(this@MainActivity)
                 .observe(this@MainActivity){
@@ -111,6 +115,35 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
+    }
+
+    private fun changeTheme(toDarkTheme: Boolean?){
+        if (toDarkTheme == true){
+            AppCompatDelegate.MODE_NIGHT_YES.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
+
+        }
+        else if (toDarkTheme == false){
+            AppCompatDelegate.MODE_NIGHT_NO.let {
+                AppCompatDelegate.setDefaultNightMode(it)
+            }
+
+        }
+
+    }
+
+    private fun verifyPrefs(){
+        lifecycleScope.launch {
+            sharedViewModel.getIsNightMode(this@MainActivity).collect{
+                isNight ->
+                isNight?.let {
+                    changeTheme(isNight)
+                    Log.i("MAINACTIVITY DUMP", "Night mode is $isNight")
+                }
+
+            }
+        }
     }
 
     private fun hideHeaderChipGroup(){
@@ -128,9 +161,14 @@ class MainActivity : AppCompatActivity() {
         navController.removeOnDestinationChangedListener(destinationChangedListener)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 
 }

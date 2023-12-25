@@ -25,7 +25,6 @@ class DashboardFragment : Fragment() {
                 .database.workoutHistoryDao()
         )
     }
-    private var viewPager: ViewPager2? = null
     private var binding: FragmentDashboardBinding? = null
 
     override fun onCreateView(
@@ -38,11 +37,9 @@ class DashboardFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewPager = sharedViewModel.viewPager2.value
-
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-        }
+//        childFragmentManager.commit {
+//            setReorderingAllowed(true)
+//        }
 
         binding?.apply {
 

@@ -36,9 +36,6 @@ class CustomViewModel(
 ): ViewModel() {
     private lateinit var datastore: AppPrefsDatastore
 
-    private var _viewPager2 = MutableLiveData<ViewPager2>()
-    val viewPager2: LiveData<ViewPager2> = _viewPager2
-
     private var _toolbar = MutableLiveData<Toolbar>()
     val toolbar: LiveData<Toolbar> = _toolbar
 
@@ -157,7 +154,11 @@ class CustomViewModel(
     fun getCurrentExerciseId(context: Context): LiveData<Int> {
         datastore = AppPrefsDatastore(context)
         return datastore.getCurrentExerciseId.asLiveData()
+    }
 
+    fun getIsNightMode(context: Context): Flow<Boolean?>{
+        datastore = AppPrefsDatastore(context)
+        return datastore.getIsNightMode
     }
 
     fun getCountdown(timeMillis: Long): Flow<Int> {
@@ -182,15 +183,14 @@ class CustomViewModel(
     GETTERS
      */
 
+
+
+
     /*
     START
     OF
     SETTERS
      */
-
-    fun setViewPager(vp: ViewPager2){
-        _viewPager2.value = vp
-    }
 
     fun setToolbar(tb: Toolbar){
         _toolbar.value = tb
@@ -233,7 +233,14 @@ class CustomViewModel(
         viewModelScope.launch {
             datastore.setWorkoutInfoAddedToDb(isAdded)
         }
+    }
 
+    fun setIsNightMode(context: Context, isNightMode: Boolean){
+        datastore = AppPrefsDatastore(context)
+
+        viewModelScope.launch {
+            datastore.setIsNightMode(isNightMode)
+        }
     }
 
     /*

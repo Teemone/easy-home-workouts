@@ -78,8 +78,6 @@ class ProfileFragment : Fragment() {
                 if (isChecked){
                     rbLight.isChecked = false
                     rbSystemDefault.isChecked = false
-
-                    changeTheme(true)
                 }
 
             }
@@ -88,8 +86,6 @@ class ProfileFragment : Fragment() {
                 if (isChecked){
                     rbDark.isChecked = false
                     rbSystemDefault.isChecked = false
-
-                    changeTheme(false)
                 }
             }
 
@@ -97,10 +93,23 @@ class ProfileFragment : Fragment() {
                 if (isChecked){
                     rbLight.isChecked = false
                     rbDark.isChecked = false
-
-                    changeTheme(currentDeviceThemeIsDark == Configuration.UI_MODE_NIGHT_YES)
                 }
 
+            }
+
+            btnApply.setOnClickListener {
+                when{
+                    rbDark.isChecked -> {
+                        changeTheme(true)
+                    }
+                    rbLight.isChecked -> {
+                        changeTheme(false)
+                    }
+                    else -> {
+                        changeTheme(null)
+                    }
+                }
+                mbs.dismiss()
             }
         }
 
@@ -113,11 +122,17 @@ class ProfileFragment : Fragment() {
             AppCompatDelegate.MODE_NIGHT_YES.let {
                 AppCompatDelegate.setDefaultNightMode(it)
             }
+
+            sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+
         }
         else if (toDarkTheme == false){
             AppCompatDelegate.MODE_NIGHT_NO.let {
                 AppCompatDelegate.setDefaultNightMode(it)
             }
+
+            sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+
         }
 
     }

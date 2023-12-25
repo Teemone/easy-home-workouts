@@ -23,17 +23,7 @@ class HomeFragment : Fragment(){
     private lateinit var viewPagerAdapter: Viewpager2Adapter
     private lateinit var viewPager: ViewPager2
     private lateinit var chipGroup: ChipGroup
-    private val sharedViewModel: CustomViewModel by activityViewModels{
-        CustomViewModelFactory(
-            (requireActivity().application as WorkoutappApplication)
-                .database.workoutInfoDao(),
-            (requireActivity().application as WorkoutappApplication)
-                .database.workoutHistoryDao()
-        )
-    }
-    private lateinit var today: Calendar
     private lateinit var toolbar: Toolbar
-
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -55,22 +45,10 @@ class HomeFragment : Fragment(){
         viewPager = binding.viewPager.apply {getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER }
         viewPager.adapter = viewPagerAdapter
         chipGroup = requireActivity().findViewById(R.id.mChipGroup)
-        sharedViewModel.setViewPager(viewPager)
-        today = Calendar.getInstance()
         toolbar = requireActivity().findViewById(R.id.homeToolbar)
-//        sharedViewModel.setToolbar(toolbar)
-
 
         handleCurrentPage()
         handleChipGroupItem()
-    }
-
-    fun setCurrentItem(itemNumber: Int){
-        viewPager.currentItem = itemNumber
-    }
-
-    fun getFragmentAtPosition(itemNumber: Int): Fragment {
-        return viewPagerAdapter.createFragment(itemNumber)
     }
 
     private fun showHeaderChipGroup(){
