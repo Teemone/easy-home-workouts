@@ -70,11 +70,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvDeviceSetting"
                 app:layout_constraintTop_toTopOf="@id/rbSystemDefault"
                 android:textSize="@dimen/settings_text_body"
                 app:layout_constraintBottom_toBottomOf="@id/rbSystemDefault"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/use_device_settings" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnApply"
+                android:text="@string/apply"
+                android:layout_marginTop="20dp"
+                app:shapeAppearance="@style/CircularCut"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDeviceSetting"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
