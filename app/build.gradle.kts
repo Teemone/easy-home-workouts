@@ -53,6 +53,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta02")
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
 
     //Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")

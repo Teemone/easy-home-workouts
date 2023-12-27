@@ -22,6 +22,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.WorkItOut.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/deep_purple</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo_light_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.WorkItOut</item>
+    </style>
+
 <!--    CardView-->
     <style name="Theme.WorkoutApp.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">?attr/backgroundColor</item>

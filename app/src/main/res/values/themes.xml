@@ -70,6 +70,13 @@
         <item name="chipEndPadding">@dimen/parent_padding_10</item>
     </style>
 
+    <style name="Theme.WorkItOut.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo_dark_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.WorkItOut</item>
+    </style>
+
+
     <style name="SkipIconColor">
         <item name="tint">@color/black</item>
     </style>
