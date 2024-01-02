@@ -37,6 +37,9 @@ class AppPrefsDatastore (private val context: Context) {
     private val workoutInfoAddedToDb = booleanPreferencesKey("workoutInfoAddedToDb")
     val getWorkoutInfoAddedToDb = context.datastore.data.map { prefs -> prefs[workoutInfoAddedToDb] ?: false }
 
+    private val isOnboardingCompleted    = booleanPreferencesKey("isOnboardingCompleted")
+    val getIsOnboardingCompleted = context.datastore.data.map { prefs -> prefs[isOnboardingCompleted] ?: false }
+
 
 
     suspend fun setTimeLeftForCurrentWorkout(timeLeft: Int) =
@@ -82,5 +85,12 @@ class AppPrefsDatastore (private val context: Context) {
         context.datastore.edit {
                 prefs ->
             prefs[followsSysDef] = followsSys
+        }
+
+    suspend fun setIsOnboardingCompleted(isCompleted: Boolean) =
+        context.datastore.edit {
+                prefs ->
+
+            prefs[isOnboardingCompleted] = isCompleted
         }
 }
