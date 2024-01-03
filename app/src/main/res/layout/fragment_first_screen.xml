@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/parent_padding_10"
     tools:context=".onboarding.FirstScreenFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgBenefit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="300dp"
+        tools:src="@drawable/workout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="@dimen/m10"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/imgBenefit"
+        app:layout_constraintStart_toStartOf="@id/imgBenefit"
+        app:layout_constraintTop_toBottomOf="@id/imgBenefit"
+        tools:text="QUICK START" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m10"
+        android:id="@+id/tvSubtitle"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="Lorem ipsum dolor donat sit vast no si vous pait no bind silk"
+        android:lineSpacingExtra="0dp"
+        android:includeFontPadding="false"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
