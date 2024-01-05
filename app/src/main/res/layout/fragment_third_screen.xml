@@ -8,7 +8,7 @@
     tools:context=".onboarding.FirstScreenFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/welcomeImage"
+        android:id="@+id/readyToBeginImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         tools:src="@drawable/workout"
@@ -19,29 +19,40 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/welcomeText"
+        android:id="@+id/readyToBeginText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_to_app_name"
+        android:text="Ready to Begin?"
         android:textSize="24sp"
-        android:textAlignment="center"
         android:fontFamily="@font/poppins_bold"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeImage"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/readyToBeginImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Get fit, stay healthy! Your App Name brings you easy and effective home workouts without any equipment. Let's start your fitness journey."
-        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:text="Are you ready to take the first step towards a healthier you? Let's get started and embrace a fitter lifestyle!"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/readyToBeginText" />
 
+    <Button
+        android:id="@+id/btnGetStarted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Started"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.75" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

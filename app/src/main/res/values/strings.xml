@@ -75,4 +75,5 @@
     <string name="dark">Dark</string>
     <string name="dark_mode_setting">Dark mode setting</string>
     <string name="apply">Apply</string>
+    <string name="welcome_to_app_name">Welcome to Easy Home Workouts!</string>
 </resources>

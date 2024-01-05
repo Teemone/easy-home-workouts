@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/hostFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -107,4 +107,9 @@
         android:id="@+id/historyFragment"
         android:name="com.example.workitout.ui.HistoryFragment"
         android:label="History" />
+    <fragment
+        android:id="@+id/hostFragment"
+        android:name="com.example.workitout.onboarding.HostFragment"
+        android:label="fragment_host"
+        tools:layout="@layout/fragment_host" />
 </navigation>
