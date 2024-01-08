@@ -11,7 +11,7 @@
         android:id="@+id/readyToBeginImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        tools:src="@drawable/workout"
+        android:src="@drawable/workout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
