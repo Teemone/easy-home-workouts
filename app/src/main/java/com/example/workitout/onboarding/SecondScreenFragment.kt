@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.viewpager2.widget.ViewPager2
 import com.example.workitout.R
 
 
 class SecondScreenFragment : Fragment() {
-
-// Todo: Scroll to next element in viewpager on click of btnNext
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,12 @@ class SecondScreenFragment : Fragment() {
         val btnNext = view.findViewById<Button>(R.id.btnNext2)
 
         btnNext.setOnClickListener {
-
+            changePage()
         }
     }
+
+    private fun changePage() = (parentFragment as HostFragment).setPage(2)
+
+
 
 }
