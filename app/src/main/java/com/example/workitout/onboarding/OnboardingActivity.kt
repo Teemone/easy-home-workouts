@@ -13,7 +13,6 @@ import com.example.workitout.R
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

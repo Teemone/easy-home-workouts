@@ -20,9 +20,8 @@ Todo:
  */
 
 class ThirdScreenFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +37,8 @@ class ThirdScreenFragment : Fragment() {
         btnGetStarted.setOnClickListener {
             val intent = Intent(requireActivity() as OnboardingActivity, MainActivity::class.java)
             startActivity(intent)
+
+
 
         }
     }

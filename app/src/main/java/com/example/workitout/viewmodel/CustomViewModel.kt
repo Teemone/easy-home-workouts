@@ -264,7 +264,7 @@ class CustomViewModel(
     }
 
     /*
-    START
+    END
     OF
     SETTERS
      */
