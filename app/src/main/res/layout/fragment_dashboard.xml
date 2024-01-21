@@ -79,8 +79,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/previous_workout"
                 android:textColor="?attr/colorPrimary"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@id/mCardViewPlan"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/mCardViewPlan" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mCardViewCurrent"
