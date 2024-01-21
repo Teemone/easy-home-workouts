@@ -59,19 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/materialDivider"
-            app:layout_constraintTop_toBottomOf="@+id/mChipGroup"
-            app:navGraph="@navigation/nav_graph"
-            tools:context=".ui.HomeFragment" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/materialDivider"
-            app:layout_constraintStart_toStartOf="@id/bnv"
-            app:layout_constraintEnd_toEndOf="@id/bnv"
             app:layout_constraintBottom_toTopOf="@id/bnv"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/mChipGroup"
+            tools:context=".ui.HomeFragment" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv"

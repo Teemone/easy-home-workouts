@@ -32,7 +32,6 @@ class WorkoutDetailsFragment : Fragment() {
                 .database.workoutHistoryDao()
         )
     }
-    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +82,6 @@ class WorkoutDetailsFragment : Fragment() {
 
     }
 
-    // add a title to the chip and calls [createChip()]
     private fun displayChip(){
         val musclesList = workoutInfo?.get(exercise!!.id)?.muscles?.split(", ")
 

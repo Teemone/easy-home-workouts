@@ -1,8 +1,6 @@
 package com.example.workitout.ui
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +19,11 @@ import com.example.workitout.viewmodel.CustomViewModelFactory
 import com.example.workitout.viewmodel.EXERCISE
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import kotlin.math.floor
 
 class ExerciseFragment : Fragment(){
-    private lateinit var dialog: Dialog
     private var exercise: Exercises? = null
     private var progress: Float? = null
     private var _binding: FragmentExerciseBinding? = null
@@ -49,15 +45,6 @@ class ExerciseFragment : Fragment(){
             exercise = it.getParcelable(EXERCISE)
             progress = it.getFloat("progress")
         }
-
-//        requireActivity()
-//            .onBackPressedDispatcher
-//            .addCallback(this, object : OnBackPressedCallback(true) {
-//                override fun handleOnBackPressed() {
-//                    goBackDialog()
-//                }
-//            })
-//
     }
 
     override fun onCreateView(
@@ -90,7 +77,7 @@ class ExerciseFragment : Fragment(){
 
             }
 
-            ibNext.setOnClickListener {v ->
+            ibNext.setOnClickListener {
                 try {
                     val nextEx = sharedViewModel.exercises[exercise!!.id + 1]
                     exercise = nextEx
@@ -110,7 +97,7 @@ class ExerciseFragment : Fragment(){
 
 
                 }catch (e: IndexOutOfBoundsException){
-                    Snackbar.make(root, "Last exercise reached", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(root, getString(R.string.last_exercise), Snackbar.LENGTH_SHORT).show()
                     ibNext.isEnabled = false
                 }
                 catch (e: Exception){
@@ -126,8 +113,7 @@ class ExerciseFragment : Fragment(){
 
                 if (formatProgressToDuration() != -1 && !isComplete)
                     countDown(formatProgressToDuration().toLong() * 1000)
-//                else if (formatProgressToDuration() != -1 && isComplete)
-//                    countDown()
+
                 else
                     countDown()
 
@@ -176,27 +162,6 @@ class ExerciseFragment : Fragment(){
         }
     }
 
-//    private fun goBackDialog() {
-//        dialog = Dialog(requireContext())
-//        dialog.setTitle("Are you sure?")
-//        val dialogBinding = DialogOnBackPressedBinding.inflate(layoutInflater)
-//        dialog.setContentView(dialogBinding.root)
-//        dialog.setCancelable(false)
-//        dialog.show()
-//
-//        dialogBinding.btnYes.setOnClickListener {
-//            findNavController().navigate(
-//                ExerciseFragmentDirections.actionExerciseFragmentToHomeFragment()
-//            )
-//            dialog.dismiss()
-//        }
-//
-//        dialogBinding.btnCancel.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//
-//    }
-
     private fun hideHeaderChipGroup(){
         val chipGroup: ChipGroup = requireActivity().findViewById(R.id.mChipGroup)
         chipGroup.visibility = View.GONE
@@ -211,12 +176,6 @@ class ExerciseFragment : Fragment(){
     override fun onStop() {
         super.onStop()
         sharedViewModel.bottomNavView.value?.visibility = View.VISIBLE
-
-
-
-        Log.i("Exercise Fragment", "onStop")
-
-
     }
 
     override fun onDestroyView() {
@@ -246,14 +205,6 @@ class ExerciseFragment : Fragment(){
 
             }
         }
-
-
-        Log.i("Exercise Fragment", "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("Exercise Fragment", "onDestroy")
 
     }
 

@@ -49,9 +49,6 @@ class CustomViewModel(
     private var _workoutHistoryFlow = MutableStateFlow<List<WorkoutHistoryEntity>>(listOf())
     val workoutHistoryFlow: StateFlow<List<WorkoutHistoryEntity>> = _workoutHistoryFlow
 
-    private var _getFollowSysDefFlow = MutableStateFlow(true)
-    val getFollowSysDefFlow = _getFollowSysDefFlow.asStateFlow()
-
     private var _exerciseIsCompletedFlow = MutableStateFlow(false)
     val exerciseIsCompletedFlow: StateFlow<Boolean> = _exerciseIsCompletedFlow
 
@@ -108,6 +105,7 @@ class CustomViewModel(
 
     fun insertAllEntries(){
         viewModelScope.launch(Dispatchers.IO) {
+
             workoutInfoDao.insertAll(
                 listOf(
                     WorkoutInfoEntity(name = "Lunges", description = "Lunges are a lower body exercise where you step forward and lower your body until your front and back knees form 90-degree angles.", muscles = "Quadriceps, Hamstrings, Glutes"),
@@ -225,10 +223,6 @@ class CustomViewModel(
 
     private fun setExerciseIsCompletedFlow(isCompleted: Boolean){
         _exerciseIsCompletedFlow.value = isCompleted
-    }
-
-    fun setFollowSysDefFlow(followSysDef: Boolean){
-        _getFollowSysDefFlow.value = followSysDef
     }
 
     fun setCurrentExerciseId(context: Context, id: Int){

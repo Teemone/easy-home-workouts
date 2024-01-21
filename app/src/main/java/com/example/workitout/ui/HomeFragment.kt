@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
@@ -15,6 +16,7 @@ import com.example.workitout.databinding.FragmentHomeBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import java.util.Calendar
@@ -24,6 +26,7 @@ class HomeFragment : Fragment(){
     private lateinit var viewPager: ViewPager2
     private lateinit var chipGroup: ChipGroup
     private lateinit var toolbar: Toolbar
+    private lateinit var bnv: BottomNavigationView
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -46,7 +49,9 @@ class HomeFragment : Fragment(){
         viewPager.adapter = viewPagerAdapter
         chipGroup = requireActivity().findViewById(R.id.mChipGroup)
         toolbar = requireActivity().findViewById(R.id.homeToolbar)
+        bnv = requireActivity().findViewById(R.id.bnv)
 
+        showNavigation()
         handleCurrentPage()
         handleChipGroupItem()
     }
@@ -72,6 +77,12 @@ class HomeFragment : Fragment(){
             }
             1 -> {chipGroup.check(chipGroup[1].id)}
         }
+    }
+
+    private fun showNavigation(){
+        toolbar.visibility = View.VISIBLE
+        bnv.visibility = View.VISIBLE
+        showHeaderChipGroup()
     }
 
     private fun handleChipGroupItem(){

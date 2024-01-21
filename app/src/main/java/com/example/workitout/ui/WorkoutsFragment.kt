@@ -2,14 +2,13 @@ package com.example.workitout.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.workitout.R
 import com.example.workitout.adapters.WorkoutListItemAdapter
 import com.example.workitout.data.Exercises
 import com.example.workitout.databinding.FragmentWorkoutsBinding
@@ -45,7 +44,6 @@ class WorkoutsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val completedExId = sharedViewModel.getCompletedExercisesId(requireContext()).value?.toList()
 
         binding?.apply {
 
@@ -65,11 +63,6 @@ class WorkoutsFragment : Fragment() {
             workoutsRecyclerView.setHasFixedSize(true)
 
         }
-    }
-
-    fun scrollTo(position: Int){
-        Log.i("SCROLL TO POSITION", position.toString())
-        binding?.workoutsRecyclerView?.scrollToPosition(position)
     }
 
     override fun onDestroy() {

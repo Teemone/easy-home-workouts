@@ -1,10 +1,9 @@
 package com.example.workitout.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -19,10 +18,18 @@ import com.example.workitout.databinding.ActivityMainBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
+import com.example.workitout.viewmodel.OnboardingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-
+import kotlinx.coroutines.runBlocking
+/*
+Todo:
+ 1. Fix the history fragment to update history items of the same day, rather than add a new entry
+ 2. Understand the reason behind the laggy [Dashboard Fragment]
+ */
 class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private lateinit var navController: NavController
@@ -32,22 +39,18 @@ class MainActivity : AppCompatActivity() {
             (application as WorkoutappApplication).database.workoutHistoryDao()
         )
     }
+    private val onboardingViewModel: OnboardingViewModel by viewModels()
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var destinationChangedListener: NavController.OnDestinationChangedListener
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        installSplashScreen()
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-
-        navController = navHostFragment.navController
 
         binding?.apply {
             toolbar = homeToolbar
@@ -55,12 +58,34 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        setSupportActionBar(toolbar)
-        setupActionBarWithNavController(navController)
-        bottomNavView.setupWithNavController(navController)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        navController = navHostFragment.navController
+
+        lifecycleScope.launch {
+
+            val isCompleted = runBlocking(Dispatchers.IO) {
+                onboardingViewModel.getIsOnboardingCompleted(this@MainActivity).first()
+            }
+
+            val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
+            if(isCompleted){
+                navGraph.setStartDestination(R.id.homeFragment)
+            }
+            else{
+                navGraph.setStartDestination(R.id.hostFragment)
+            }
+            navController.graph = navGraph
+
+            setSupportActionBar(toolbar)
+            setupActionBarWithNavController(navController)
+            bottomNavView.setupWithNavController(navController)
+
+        }
+
         destinationChangedListener =
             NavController.OnDestinationChangedListener { controller, destination, _ ->
-
                 when (destination.id) {
                     R.id.homeFragment -> {
                         toolbar.apply {
@@ -93,6 +118,12 @@ class MainActivity : AppCompatActivity() {
                     R.id.profileFragment -> {
                         toolbar.navigationIcon = null
                         hideHeaderChipGroup()
+                    }
+
+                    R.id.hostFragment -> {
+                        toolbar.visibility = View.GONE
+                        hideHeaderChipGroup()
+                        bottomNavView.visibility = View.GONE
                     }
 
                     else -> toolbar.setNavigationOnClickListener {

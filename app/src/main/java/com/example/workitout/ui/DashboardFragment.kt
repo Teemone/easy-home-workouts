@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.navigation.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.workitout.R
 import com.example.workitout.databinding.FragmentDashboardBinding
 import com.example.workitout.db.WorkoutappApplication
@@ -37,9 +35,6 @@ class DashboardFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        childFragmentManager.commit {
-//            setReorderingAllowed(true)
-//        }
 
         binding?.apply {
 
@@ -57,21 +52,12 @@ class DashboardFragment : Fragment() {
                                     .navigate(HomeFragmentDirections.actionHomeFragmentToExerciseFragment(
                                         sharedViewModel.exercises[currentExId], progress.toFloat()
                                     ))
-//                        (requireParentFragment() as HomeFragment).setCurrentItem(1)
-//
-//
-//                        ((requireParentFragment() as HomeFragment)
-//                            .getFragmentAtPosition(1) as WorkoutsFragment).scrollTo(it)
-
                             }
 
 
                         }
 
                     tvExerciseName.text = sharedViewModel.exercises[currentExId].name
-
-                    // Uses currentExerciseId to scroll the [RecyclerView] to it's position
-
 
                 }
 
