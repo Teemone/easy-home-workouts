@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorAccent">@color/purple</item>
         <item name="android:fontFamily">@font/poppins_reg</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?attr/backgroundColor</item>
         <item name="android:windowBackground">?attr/backgroundColor</item>
 
 
