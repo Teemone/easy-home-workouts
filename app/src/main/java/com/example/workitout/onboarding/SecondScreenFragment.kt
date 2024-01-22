@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.example.workitout.R
-
+import com.google.android.material.imageview.ShapeableImageView
 
 class SecondScreenFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +25,9 @@ class SecondScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnNext = view.findViewById<Button>(R.id.btnNext2)
+        val howItWorksImg = view.findViewById<ShapeableImageView>(R.id.howItWorksImage)
+
+        howItWorksImg.load(ContextCompat.getDrawable(requireContext(), R.drawable.how_it_works))
 
         btnNext.setOnClickListener {
             changePage()

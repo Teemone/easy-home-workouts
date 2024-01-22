@@ -54,6 +54,8 @@ dependencies {
 
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("io.coil-kt:coil:2.5.0")
+
 
 
     //Lifecycle

@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/parent_padding_10"
     tools:context=".onboarding.FirstScreenFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/howItWorksImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/workout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="16dp"
+        android:minHeight="300dp"
+        tools:src="@drawable/workout"
+        app:layout_constraintBottom_toTopOf="@id/howItWorksText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:shapeAppearance="@style/CircularCut" />
 
     <TextView
         android:id="@+id/howItWorksText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="How It Works"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:textSize="24sp"
+        android:text="How It Works"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/howItWorksImage"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/howItWorksImage" />
 
     <TextView
         android:id="@+id/textView2"

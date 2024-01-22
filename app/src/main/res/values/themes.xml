@@ -12,7 +12,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorAccent">@color/light_purple</item>
-        <item name="android:navigationBarColor">?attr/backgroundColor</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">?attr/backgroundColor</item>
 
         <item name="android:fontFamily">@font/poppins_reg</item>
@@ -76,6 +76,9 @@
         <item name="postSplashScreenTheme">@style/Theme.WorkItOut</item>
     </style>
 
+    <style name="Theme.WorkItOut.WelcomeLogo">
+        <item name="android:src">@drawable/app_logo_dark_foreground</item>
+    </style>
 
     <style name="SkipIconColor">
         <item name="tint">@color/black</item>

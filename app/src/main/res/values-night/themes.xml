@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorAccent">@color/purple</item>
         <item name="android:fontFamily">@font/poppins_reg</item>
-        <item name="android:navigationBarColor">?attr/backgroundColor</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">?attr/backgroundColor</item>
 
 
@@ -26,6 +26,10 @@
         <item name="windowSplashScreenBackground">@color/deep_purple</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo_light_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.WorkItOut</item>
+    </style>
+
+    <style name="Theme.WorkItOut.WelcomeLogo">
+        <item name="android:src">@drawable/app_logo_light_foreground</item>
     </style>
 
 <!--    CardView-->
