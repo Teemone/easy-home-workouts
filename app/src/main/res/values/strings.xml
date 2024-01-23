@@ -77,4 +77,10 @@
     <string name="apply">Apply</string>
     <string name="welcome_to_app_name">Welcome to Easy Home Workouts!</string>
     <string name="last_exercise">Last exercise reached</string>
+    <string name="get_started">Get Started</string>
+    <string name="are_you_ready_text">Are you ready to take the first step towards a healthier you? Let\'s get started and embrace a fitter lifestyle!</string>
+    <string name="ready_to_begin">Ready to Begin?</string>
+    <string name="welcome_text">Get fit, stay healthy! Your App Name brings you easy and effective home workouts without any equipment. Let\'s start your fitness journey.</string>
+    <string name="how_it_works_text">Discover a variety of exercises tailored for home workouts. Follow step-by-step guides, track your progress, and achieve your fitness goals effortlessly.</string>
+    <string name="how_it_works">How It Works</string>
 </resources>

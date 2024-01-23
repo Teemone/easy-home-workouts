@@ -10,15 +10,17 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/howItWorksImage"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        android:maxHeight="300dp"
         android:layout_marginTop="16dp"
         android:minHeight="300dp"
-        tools:src="@drawable/workout"
         app:layout_constraintBottom_toTopOf="@id/howItWorksText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearance="@style/CircularCut" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:shapeAppearance="@style/CircularCut"
+        tools:src="@drawable/workout" />
 
     <TextView
         android:id="@+id/howItWorksText"
@@ -26,9 +28,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="How It Works"
+        android:text="@string/how_it_works"
         android:textAlignment="center"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/howItWorksImage" />
@@ -38,10 +41,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Discover a variety of exercises tailored for home workouts. Follow step-by-step guides, track your progress, and achieve your fitness goals effortlessly."
+        android:text="@string/how_it_works_text"
+        android:layout_marginBottom="16dp"
         android:textAlignment="center"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btnNext2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/howItWorksText" />
 
@@ -49,12 +55,11 @@
         android:id="@+id/btnNext2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
