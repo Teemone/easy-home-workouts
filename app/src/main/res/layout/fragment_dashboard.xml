@@ -52,7 +52,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Home workout plan"
+                            android:text="@string/home_workout_plan"
                             android:textColor="?attr/colorOnSecondary"
                             android:background="@drawable/black_caption_background"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
@@ -64,7 +64,7 @@
                             android:background="@drawable/black_caption_background"
                             android:textColor="?attr/colorOnSecondary"
                             android:fontFamily="@font/poppins_light"
-                            android:text="No equipment required"
+                            android:text="@string/no_equipment_required"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     </LinearLayout>

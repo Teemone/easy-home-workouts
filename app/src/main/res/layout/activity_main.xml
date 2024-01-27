@@ -31,7 +31,7 @@
             android:id="@+id/mChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:paddingBottom="@dimen/parent_padding_10"
             app:layout_constraintEnd_toEndOf="@id/appBarLayout"
             app:layout_constraintStart_toStartOf="@id/appBarLayout"
@@ -43,14 +43,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Dashboard" />
+                android:text="@string/dashboard" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/workoutsChip"
                 style="@style/Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Workouts" />
+                android:text="@string/workouts" />
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.fragment.app.FragmentContainerView

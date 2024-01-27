@@ -84,4 +84,7 @@
     <string name="how_it_works_text">Discover a variety of exercises tailored for home workouts. Follow step-by-step guides, track your progress, and achieve your fitness goals effortlessly.</string>
     <string name="how_it_works">How It Works</string>
     <string name="pushups_image">Pushups image</string>
+    <string name="home_workout_plan">Home workout plan</string>
+    <string name="no_equipment_required">No equipment required</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
