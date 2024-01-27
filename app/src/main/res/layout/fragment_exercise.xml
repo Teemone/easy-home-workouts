@@ -5,14 +5,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--        Primary layout container-->
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/cl1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/parent_padding_10"
             android:orientation="vertical">
 
 
@@ -39,7 +37,8 @@
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="0dp"
                 android:textSize="16sp"
-                app:drawableStartCompat="@drawable/outline_info_24" />
+                app:drawableStartCompat="@drawable/outline_info_24"
+                app:drawableTint="?attr/colorControlNormal" />
 
             <!--        Start progress indicator container-->
             <LinearLayout
@@ -173,7 +172,7 @@
             </LinearLayout>
             <!--        End progress indicator container-->
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBeginWorkout"
                 style="@style/Theme.WorkoutApp.Button"
                 android:layout_width="wrap_content"
