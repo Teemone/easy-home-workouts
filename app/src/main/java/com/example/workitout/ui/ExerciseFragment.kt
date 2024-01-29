@@ -1,6 +1,7 @@
 package com.example.workitout.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,7 @@ class ExerciseFragment : Fragment(){
         arguments?.let {
             exercise = it.getParcelable(EXERCISE)
             progress = it.getFloat("progress")
+            sharedViewModel.getLatestHistoryEntry()
         }
     }
 
@@ -134,7 +136,6 @@ class ExerciseFragment : Fragment(){
 
         }
 
-
     }
 
     // convert the workout progress percentage to actual time left
@@ -181,6 +182,14 @@ class ExerciseFragment : Fragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
+        lifecycleScope.launch {
+            sharedViewModel.latestHistoryEntityFlow.collect{
+                Log.i("LATEST HISTORY DUMP",
+                    it.toString()
+                )
+            }
+        }
 
         if (beginWorkoutBtnClicked){
             lifecycleScope.launch {

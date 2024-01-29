@@ -10,22 +10,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.viewpager2.widget.ViewPager2
 import com.example.workitout.data.AppPrefsDatastore
 import com.example.workitout.data.Constants
 import com.example.workitout.data.Exercises
-import com.example.workitout.db.tables.WorkoutHistoryEntity
-import com.example.workitout.db.tables.WorkoutInfoEntity
 import com.example.workitout.db.dao.WorkoutHistoryDao
 import com.example.workitout.db.dao.WorkoutInfoDao
+import com.example.workitout.db.tables.WorkoutHistoryEntity
+import com.example.workitout.db.tables.WorkoutInfoEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
 const val TAG = "VIEW-MODEL DUMP"
@@ -51,6 +51,9 @@ class CustomViewModel(
 
     private var _exerciseIsCompletedFlow = MutableStateFlow(false)
     val exerciseIsCompletedFlow: StateFlow<Boolean> = _exerciseIsCompletedFlow
+
+    private var _latestHistoryEntryFlow = emptyFlow<WorkoutHistoryEntity>()
+    val latestHistoryEntityFlow get() = _latestHistoryEntryFlow
 
     val exercises = Constants.returnExercises()
 
@@ -117,6 +120,17 @@ class CustomViewModel(
                     WorkoutInfoEntity(name = "Jumping Jacks", description = "Jumping jacks are a cardiovascular exercise where you start with your feet together and hands at your sides, then jump while spreading your legs and raising your arms overhead.", muscles = "Full body, Cardiovascular", duration = 45000)
                 )
             )
+        }
+    }
+
+    fun getLatestHistoryEntry(){
+        viewModelScope.launch {
+            workoutHistoryDao.getLatestEntry().collect{
+                _latestHistoryEntryFlow = flowOf(it)
+                Log.i("FLOW POPULATED DUMP",
+                    it.toString()
+                )
+            }
         }
     }
 

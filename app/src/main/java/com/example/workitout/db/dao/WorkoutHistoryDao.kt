@@ -12,6 +12,10 @@ interface WorkoutHistoryDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(workoutHistory: WorkoutHistoryEntity)
 
-    @Query("SELECT * FROM WorkoutHistoryEntity")
+    @Query("SELECT * FROM WorkoutHistoryEntity ORDER BY date DESC")
     fun getAllEntries(): Flow<List<WorkoutHistoryEntity>>
+
+    @Query("SELECT * FROM WorkoutHistoryEntity ORDER BY id DESC LIMIT 1")
+    fun getLatestEntry(): Flow<WorkoutHistoryEntity>
+
 }
