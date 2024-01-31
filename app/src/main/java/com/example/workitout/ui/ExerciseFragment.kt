@@ -27,6 +27,7 @@ import kotlin.math.floor
 class ExerciseFragment : Fragment(){
     private var exercise: Exercises? = null
     private var progress: Float? = null
+    private var isPreviousWorkout: Boolean? = null
     private var _binding: FragmentExerciseBinding? = null
     private val sharedViewModel: CustomViewModel by activityViewModels{
         CustomViewModelFactory(
@@ -45,6 +46,7 @@ class ExerciseFragment : Fragment(){
         arguments?.let {
             exercise = it.getParcelable(EXERCISE)
             progress = it.getFloat("progress")
+            isPreviousWorkout = it.getBoolean("isPreviousWorkout")
             sharedViewModel.getLatestHistoryEntry()
         }
     }
@@ -183,30 +185,31 @@ class ExerciseFragment : Fragment(){
         super.onDestroyView()
         _binding = null
 
-        lifecycleScope.launch {
-            sharedViewModel.latestHistoryEntityFlow.collect{
-                Log.i("LATEST HISTORY DUMP",
-                    it.toString()
-                )
-            }
-        }
-
         if (beginWorkoutBtnClicked){
             lifecycleScope.launch {
                 sharedViewModel.exerciseIsCompletedFlow.collect{isCompleted ->
-                    sharedViewModel.getExerciseProgress(requireContext()).asFlow().collect{
-                        sharedViewModel.insertHistory(
-                            WorkoutHistoryEntity(
-                                date = LocalDate.now().toString(),
-                                workoutName = exercise!!.name!!,
-                                status = if (isCompleted) {
-                                    "complete"
-                                } else {
-                                    "incomplete"
-                                },
-                                progress = it
-                            )
-                        )
+                    sharedViewModel.getExerciseProgress(requireContext()).asFlow().collect{ workoutProgress ->
+
+                        if (isPreviousWorkout!!){
+                            sharedViewModel.latestHistoryEntityFlow.collect {historyItem ->
+                                try {
+                                    upsertWorkoutHistory(historyItem.id, historyItem.workoutName, isCompleted, workoutProgress)
+                                }catch (e: Exception){
+                                    e.printStackTrace()
+                                }
+
+                            }
+                        }
+                        else{
+                            try {
+                                upsertWorkoutHistory(null, exercise!!.name!!, isCompleted, workoutProgress)
+                            }catch (e: Exception){
+                                e.printStackTrace()
+                            }
+                        }
+
+
+
                     }
 
 
@@ -215,6 +218,39 @@ class ExerciseFragment : Fragment(){
             }
         }
 
+    }
+
+    private fun upsertWorkoutHistory(id:Long?, workoutName: String, isCompleted: Boolean, progress: Double) {
+        val workoutEntity =
+            when{
+                id == null -> {
+                    WorkoutHistoryEntity(
+                        date = LocalDate.now().toString(),
+                        workoutName = workoutName,
+                        status = if (isCompleted) {
+                            "complete"
+                        } else {
+                            "incomplete"
+                        },
+                        progress = progress
+                    )
+                }
+                else -> {
+                    WorkoutHistoryEntity(
+                        id = id,
+                        date = LocalDate.now().toString(),
+                        workoutName = workoutName,
+                        status = if (isCompleted) {
+                            "complete"
+                        } else {
+                            "incomplete"
+                        },
+                        progress = progress
+                    )
+                }
+            }
+
+        sharedViewModel.insertHistory(workoutEntity)
     }
 
 

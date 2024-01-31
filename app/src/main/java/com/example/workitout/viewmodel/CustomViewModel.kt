@@ -91,7 +91,7 @@ class CustomViewModel(
     fun insertHistory(historyItem: WorkoutHistoryEntity){
         viewModelScope.launch {
             try {
-                workoutHistoryDao.insert(historyItem)
+                workoutHistoryDao.upsert(historyItem)
             }catch (e: Exception){
                 e.printStackTrace()
             }
@@ -127,9 +127,15 @@ class CustomViewModel(
         viewModelScope.launch {
             workoutHistoryDao.getLatestEntry().collect{
                 _latestHistoryEntryFlow = flowOf(it)
-                Log.i("FLOW POPULATED DUMP",
-                    it.toString()
-                )
+
+                try {
+                    Log.i("FLOW POPULATED DUMP",
+                        it.toString()
+                    )
+                }catch (e: NullPointerException){
+                    e.printStackTrace()
+                }
+
             }
         }
     }

@@ -36,6 +36,10 @@
             android:name="progress"
             android:defaultValue="-1"
             app:argType="float" />
+        <argument
+            android:name="isPreviousWorkout"
+            android:defaultValue="false"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_exerciseFragment_to_workoutDetailsFragment"
             app:destination="@id/workoutDetailsFragment" />

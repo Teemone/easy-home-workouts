@@ -50,7 +50,7 @@ class DashboardFragment : Fragment() {
 
                                 view.findNavController()
                                     .navigate(HomeFragmentDirections.actionHomeFragmentToExerciseFragment(
-                                        sharedViewModel.exercises[currentExId], progress.toFloat()
+                                        sharedViewModel.exercises[currentExId], progress.toFloat(), true
                                     ))
                             }
 
