@@ -1,6 +1,7 @@
 package com.example.workitout.db.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,5 +19,8 @@ interface WorkoutHistoryDao {
 
     @Query("SELECT * FROM WorkoutHistoryEntity ORDER BY id DESC LIMIT 1")
     fun getLatestEntry(): Flow<WorkoutHistoryEntity>
+
+    @Delete
+    suspend fun deleteItem(workoutHistory: WorkoutHistoryEntity)
 
 }

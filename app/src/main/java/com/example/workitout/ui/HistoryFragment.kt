@@ -14,6 +14,11 @@ import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
 import kotlinx.coroutines.launch
 
+/*
+Todo:
+ 1. Find out why theres an outofbounds exception when items are deleted from the history fragment
+ */
+
 class HistoryFragment : Fragment() {
 
     private val sharedViewModel: CustomViewModel by activityViewModels{
@@ -37,7 +42,9 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.rvWorkoutHistory.adapter = WorkoutHistoryAdapter()
+        binding.rvWorkoutHistory.adapter = WorkoutHistoryAdapter{
+            sharedViewModel.deleteEntry(it)
+        }
 
         lifecycleScope.launch {
             sharedViewModel.workoutHistoryFlow.collect{

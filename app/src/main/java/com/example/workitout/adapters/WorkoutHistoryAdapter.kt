@@ -11,7 +11,7 @@ import com.example.workitout.databinding.WorkoutHistoryListItemBinding
 import com.example.workitout.db.tables.WorkoutHistoryEntity
 import java.time.LocalDate
 
-class WorkoutHistoryAdapter:
+class WorkoutHistoryAdapter(private val onLongClick: (WorkoutHistoryEntity) -> Unit):
     ListAdapter<WorkoutHistoryEntity, WorkoutHistoryAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(val binding: WorkoutHistoryListItemBinding): RecyclerView.ViewHolder(binding.root){
@@ -52,6 +52,11 @@ class WorkoutHistoryAdapter:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+
+        holder.itemView.setOnLongClickListener {
+            onLongClick(getItem(position))
+            true
+        }
     }
 
     companion object DiffCallback: DiffUtil.ItemCallback<WorkoutHistoryEntity>() {
@@ -69,6 +74,5 @@ class WorkoutHistoryAdapter:
             return oldItem == newItem
         }
     }
-
 
 }

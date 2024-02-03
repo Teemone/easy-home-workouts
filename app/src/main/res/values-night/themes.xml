@@ -54,7 +54,7 @@
     </style>
 
     <style name="SkipIconColor">
-        <item name="tint">@color/light_gray</item>
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">

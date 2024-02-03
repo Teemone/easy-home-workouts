@@ -118,6 +118,9 @@ class ExerciseFragment : Fragment(){
                 if (formatProgressToDuration() != -1 && !isComplete)
                     countDown(formatProgressToDuration().toLong() * 1000)
 
+                else if (formatProgressToDuration() != -1 && isComplete)
+                    countDown()
+
                 else
                     countDown()
 
@@ -185,39 +188,57 @@ class ExerciseFragment : Fragment(){
         super.onDestroyView()
         _binding = null
 
-        if (beginWorkoutBtnClicked){
-            lifecycleScope.launch {
-                sharedViewModel.exerciseIsCompletedFlow.collect{isCompleted ->
-                    sharedViewModel.getExerciseProgress(requireContext()).asFlow().collect{ workoutProgress ->
+        postDestroyedActions()
 
-                        if (isPreviousWorkout!!){
-                            sharedViewModel.latestHistoryEntityFlow.collect {historyItem ->
+    }
+
+    private fun postDestroyedActions() {
+        if (beginWorkoutBtnClicked) {
+            lifecycleScope.launch {
+                sharedViewModel.exerciseIsCompletedFlow.collect { isCompleted ->
+                    sharedViewModel.getExerciseProgress(requireContext()).asFlow()
+                        .collect { workoutProgress ->
+
+                            if (isPreviousWorkout!!) {
+                                sharedViewModel.latestHistoryEntityFlow.collect { historyItem ->
+                                    try {
+                                        upsertWorkoutHistory(
+                                            historyItem.id,
+                                            historyItem.workoutName,
+                                            isCompleted,
+                                            workoutProgress
+                                        )
+                                    } catch (e: NullPointerException) {
+                                        upsertWorkoutHistory(
+                                            null,
+                                            exercise!!.name!!,
+                                            isCompleted,
+                                            workoutProgress
+                                        )
+                                    }
+
+                                }
+                            } else {
                                 try {
-                                    upsertWorkoutHistory(historyItem.id, historyItem.workoutName, isCompleted, workoutProgress)
-                                }catch (e: Exception){
+                                    upsertWorkoutHistory(
+                                        null,
+                                        exercise!!.name!!,
+                                        isCompleted,
+                                        workoutProgress
+                                    )
+                                } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
-
                             }
+
+
                         }
-                        else{
-                            try {
-                                upsertWorkoutHistory(null, exercise!!.name!!, isCompleted, workoutProgress)
-                            }catch (e: Exception){
-                                e.printStackTrace()
-                            }
-                        }
-
-
-
-                    }
 
 
                 }
 
             }
         }
-
     }
 
     private fun upsertWorkoutHistory(id:Long?, workoutName: String, isCompleted: Boolean, progress: Double) {

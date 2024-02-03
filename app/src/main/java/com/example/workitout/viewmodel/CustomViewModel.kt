@@ -126,17 +126,20 @@ class CustomViewModel(
     fun getLatestHistoryEntry(){
         viewModelScope.launch {
             workoutHistoryDao.getLatestEntry().collect{
-                _latestHistoryEntryFlow = flowOf(it)
 
                 try {
-                    Log.i("FLOW POPULATED DUMP",
-                        it.toString()
-                    )
+                    _latestHistoryEntryFlow = flowOf(it)
                 }catch (e: NullPointerException){
                     e.printStackTrace()
                 }
 
             }
+        }
+    }
+
+    fun deleteEntry(workoutHistoryEntity: WorkoutHistoryEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            workoutHistoryDao.deleteItem(workoutHistoryEntity)
         }
     }
 

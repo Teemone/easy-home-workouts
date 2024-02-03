@@ -81,7 +81,7 @@
     </style>
 
     <style name="SkipIconColor">
-        <item name="tint">@color/black</item>
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="SelectUnitChip" parent="Chip">
