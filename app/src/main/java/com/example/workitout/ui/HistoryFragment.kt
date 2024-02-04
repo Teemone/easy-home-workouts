@@ -1,5 +1,6 @@
 package com.example.workitout.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.workitout.adapters.WorkoutHistoryAdapter
 import com.example.workitout.databinding.FragmentHistoryBinding
 import com.example.workitout.db.WorkoutappApplication
+import com.example.workitout.db.tables.WorkoutHistoryEntity
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
 import kotlinx.coroutines.launch
-
-/*
-Todo:
- 1. Find out why theres an outofbounds exception when items are deleted from the history fragment
- */
 
 class HistoryFragment : Fragment() {
 
@@ -42,9 +39,7 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.rvWorkoutHistory.adapter = WorkoutHistoryAdapter{
-            sharedViewModel.deleteEntry(it)
-        }
+        binding.rvWorkoutHistory.adapter = WorkoutHistoryAdapter{ confirmDeleteItemDialog(it) }
 
         lifecycleScope.launch {
             sharedViewModel.workoutHistoryFlow.collect{
@@ -54,7 +49,7 @@ class HistoryFragment : Fragment() {
                 }
                 else{
                     (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
-                        .submitList(it)
+                        .submitList(it.toMutableList())
                     binding.rvWorkoutHistory.visibility = View.VISIBLE
                     binding.tvNoHistory.visibility = View.GONE
                 }
@@ -62,6 +57,28 @@ class HistoryFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun confirmDeleteItemDialog(item: WorkoutHistoryEntity) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Are you sure?")
+            .setMessage("This action will permanently delete this item")
+            .setPositiveButton("Yes") { dialog, _ ->
+                sharedViewModel.deleteEntry(item)
+                lifecycleScope.launch {
+                    sharedViewModel.workoutHistoryFlow.collect{
+                        try {
+                            (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
+                                .submitList(it.toMutableList())
+                        }catch (e: Exception){
+                            e.printStackTrace()
+                        }
+                    }
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     override fun onStart() {

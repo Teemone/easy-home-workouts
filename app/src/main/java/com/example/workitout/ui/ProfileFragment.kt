@@ -146,9 +146,4 @@ class ProfileFragment : Fragment() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        sharedViewModel.toolbar.value?.title = getString(R.string.more)
-    }
-
 }

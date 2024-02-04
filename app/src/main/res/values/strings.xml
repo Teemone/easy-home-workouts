@@ -47,6 +47,7 @@
     <string name="duration">Duration</string>
     <string name="skip">Skip</string>
     <string name="begin_workout">Begin workout</string>
+    <string name="resume_workout">Resume workout</string>
     <string name="skip_the_current_workout">Skip the current workout</string>
     <string name="learn_more">Learn more</string>
     <string name="learn_more_icon">Learn more icon</string>

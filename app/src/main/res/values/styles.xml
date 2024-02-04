@@ -42,6 +42,7 @@
 
     <style name="Theme.WorkoutApp.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">17sp</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:padding">10dp</item>
         <item name="android:fontFamily">@font/poppins_reg</item>
         <item name="android:includeFontPadding">false</item>

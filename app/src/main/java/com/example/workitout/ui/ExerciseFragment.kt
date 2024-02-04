@@ -1,7 +1,6 @@
 package com.example.workitout.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +27,7 @@ class ExerciseFragment : Fragment(){
     private var exercise: Exercises? = null
     private var progress: Float? = null
     private var isPreviousWorkout: Boolean? = null
+    private var nextExercise: Exercises? = null
     private var _binding: FragmentExerciseBinding? = null
     private val sharedViewModel: CustomViewModel by activityViewModels{
         CustomViewModelFactory(
@@ -80,23 +80,28 @@ class ExerciseFragment : Fragment(){
                 }
 
             }
+            btnBeginWorkout.text = setButtonText()
 
             ibNext.setOnClickListener {
                 try {
-                    val nextEx = sharedViewModel.exercises[exercise!!.id + 1]
-                    exercise = nextEx
-                    ivExercise.setImageResource(nextEx.image)
-                    tvDuration.text = getString(R.string._s, nextEx.durationAsInt())
+                    nextExercise = sharedViewModel.exercises[exercise!!.id + 1]
+                    exercise = nextExercise
+                    progress = 0f
+                    isPreviousWorkout = false
+                    ivExercise.setImageResource(nextExercise!!.image)
+                    tvDuration.text = getString(R.string._s, nextExercise!!.durationAsInt())
                     tvCountdown.text = getString(
                         R.string._00_00,
-                        sharedViewModel.appendZero(nextEx.durationAsInt()))
+                        sharedViewModel.appendZero(nextExercise!!.durationAsInt()))
                     pIndicatorCountdown.apply {
-                        max = nextEx.durationAsInt()
-                        progress = nextEx.durationAsInt()
+                        max = nextExercise!!.durationAsInt()
+                        progress = nextExercise!!.durationAsInt()
                     }
 
-                    sharedViewModel.setCurrentExerciseId(requireContext(), nextEx.id)
-                    sharedViewModel.setTimeLeftForCurrentWorkout(nextEx.durationAsInt(), requireContext(), nextEx)
+                    sharedViewModel.setCurrentExerciseId(requireContext(), nextExercise!!.id)
+                    sharedViewModel.setTimeLeftForCurrentWorkout(nextExercise!!.durationAsInt(), requireContext(),
+                        nextExercise!!
+                    )
                     sharedViewModel.toolbar.value?.title = exercise?.name
 
 
@@ -117,9 +122,6 @@ class ExerciseFragment : Fragment(){
 
                 if (formatProgressToDuration() != -1 && !isComplete)
                     countDown(formatProgressToDuration().toLong() * 1000)
-
-                else if (formatProgressToDuration() != -1 && isComplete)
-                    countDown()
 
                 else
                     countDown()
@@ -152,6 +154,13 @@ class ExerciseFragment : Fragment(){
             return floor((a * exercise!!.durationAsInt().toFloat())).toInt()
         }
         return -1
+    }
+
+    private fun setButtonText(): String{
+        return when(isPreviousWorkout){
+            true -> getString(R.string.resume_workout)
+            else -> getString(R.string.begin_workout)
+        }
     }
 
     private fun FragmentExerciseBinding.countDown(duration: Long = exercise!!.duration) {

@@ -45,13 +45,8 @@ class HomeFragment : Fragment(){
         toolbar = requireActivity().findViewById(R.id.homeToolbar)
         bnv = requireActivity().findViewById(R.id.bnv)
 
-        showNavigation()
         handleCurrentPage()
         handleChipGroupItem()
-    }
-
-    private fun showHeaderChipGroup(){
-        chipGroup.visibility = View.VISIBLE
     }
 
     private fun handleCurrentPage(){
@@ -73,12 +68,6 @@ class HomeFragment : Fragment(){
         }
     }
 
-    private fun showNavigation(){
-        toolbar.visibility = View.VISIBLE
-        bnv.visibility = View.VISIBLE
-        showHeaderChipGroup()
-    }
-
     private fun handleChipGroupItem(){
         val dashboardChip = requireActivity().findViewById<Chip>(R.id.dashboardChip)
         val workoutsChip = requireActivity().findViewById<Chip>(R.id.workoutsChip)
@@ -96,16 +85,6 @@ class HomeFragment : Fragment(){
 
             viewPager.currentItem = 1
         }
-    }
-
-    private fun setToolbarTitle(title: String){
-        toolbar.title = title
-    }
-
-    override fun onStart() {
-        super.onStart()
-        showHeaderChipGroup()
-        setToolbarTitle(getString(R.string.plan))
     }
 
     override fun onDestroyView() {

@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.workitout.ui.ProfileFragment"
-        android:label="@string/plan"
+        android:label="@string/more"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"

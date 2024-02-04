@@ -100,8 +100,8 @@ class MainActivity : AppCompatActivity() {
                                     R.id.historyFragment
                                 )
                             }
-
                         }
+                        showNavigation()
                     }
                     R.id.historyFragment -> {
                         hideHeaderChipGroup()
@@ -136,7 +136,6 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel.setToolbar(toolbar)
         sharedViewModel.setBnv(bottomNavView)
 
-        verifyPrefs()
 
         lifecycleScope.launch {
             sharedViewModel.getWorkoutInfoAddedToDb(this@MainActivity)
@@ -152,45 +151,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun changeTheme(toDarkTheme: Boolean?){
-        if (toDarkTheme == true){
-            AppCompatDelegate.MODE_NIGHT_YES.let {
-                AppCompatDelegate.setDefaultNightMode(it)
-            }
-
-        }
-        else if (toDarkTheme == false){
-            AppCompatDelegate.MODE_NIGHT_NO.let {
-                AppCompatDelegate.setDefaultNightMode(it)
-            }
-
-        }
-
-    }
-
-    private fun verifyPrefs(){
-        lifecycleScope.launch {
-
-            sharedViewModel.getFollowsSysDef(this@MainActivity).collect{
-                it?.let {
-                    if(!it){
-                        sharedViewModel.getIsNightMode(this@MainActivity).collect{
-                                isNight ->
-                            if (isNight != null){
-                                changeTheme(isNight)
-                            }
-                        }
-                    }
-                }
-            }
-
-
-        }
-    }
-
     private fun hideHeaderChipGroup(){
         val chipGroup: ChipGroup = findViewById(R.id.mChipGroup)
         chipGroup.visibility = View.GONE
+    }
+
+    private fun showNavigation(){
+        toolbar.visibility = View.VISIBLE
+        bottomNavView.visibility = View.VISIBLE
+        findViewById<ChipGroup>(R.id.mChipGroup).visibility = View.VISIBLE
     }
 
     override fun onStart() {
