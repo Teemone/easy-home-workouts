@@ -122,27 +122,28 @@ class ProfileFragment : Fragment() {
     }
 
     private fun changeTheme(toDarkTheme: Boolean?){
-        if (toDarkTheme == true){
+        when (toDarkTheme) {
+            true -> {
 
-            AppCompatDelegate.MODE_NIGHT_YES.let {
-                AppCompatDelegate.setDefaultNightMode(it)
+                AppCompatDelegate.MODE_NIGHT_YES.let {
+                    AppCompatDelegate.setDefaultNightMode(it)
+                }
+
+                sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+                sharedViewModel.setFollowsSysDef(requireContext(), false)
+
             }
+            false -> {
+                AppCompatDelegate.MODE_NIGHT_NO.let {
+                    AppCompatDelegate.setDefaultNightMode(it)
+                }
 
-            sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
-            sharedViewModel.setFollowsSysDef(requireContext(), false)
+                sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
+                sharedViewModel.setFollowsSysDef(requireContext(), false)
 
-        }
-        else if (toDarkTheme == false){
-            AppCompatDelegate.MODE_NIGHT_NO.let {
-                AppCompatDelegate.setDefaultNightMode(it)
             }
-
-            sharedViewModel.setIsNightMode(requireContext(), toDarkTheme)
-            sharedViewModel.setFollowsSysDef(requireContext(), false)
-
+            else -> sharedViewModel.setFollowsSysDef(requireContext(), true)
         }
-        else
-            sharedViewModel.setFollowsSysDef(requireContext(), true)
 
     }
 
