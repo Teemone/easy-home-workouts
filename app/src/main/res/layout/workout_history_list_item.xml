@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:selectableItemBackground"
         android:paddingStart="15dp"
+        android:paddingTop="5dp"
         android:paddingEnd="15dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/tvWorkoutName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginEnd="8dp"
             android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
             android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvDate"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Kettleball flip" />
@@ -38,34 +42,34 @@
             android:id="@+id/tvCompletion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/completion"
             android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
             app:layout_constraintStart_toStartOf="@id/tvWorkoutName"
-            app:layout_constraintTop_toBottomOf="@id/tvWorkoutName"
-            android:text="@string/completion" />
+            app:layout_constraintTop_toBottomOf="@id/tvWorkoutName" />
 
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/tvCompletion"
-            app:layout_constraintTop_toBottomOf="@id/tvCompletion"
+            android:text="@string/status"
             android:textAppearance="@style/Theme.WorkoutApp.SettingsText"
-            android:text="@string/status" />
+            app:layout_constraintStart_toStartOf="@id/tvCompletion"
+            app:layout_constraintTop_toBottomOf="@id/tvCompletion" />
 
         <TextView
             android:id="@+id/tvCompletionValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvDate"
             app:layout_constraintEnd_toEndOf="@id/tvDate"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
             tools:text="75%" />
 
         <TextView
             android:id="@+id/tvStatusValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvCompletionValue"
             app:layout_constraintEnd_toEndOf="@id/tvCompletionValue"
+            app:layout_constraintTop_toBottomOf="@id/tvCompletionValue"
             tools:text="@string/complete" />
 
 
