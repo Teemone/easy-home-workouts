@@ -208,8 +208,8 @@ class ExerciseFragment : Fragment(){
                     sharedViewModel.getExerciseProgress(requireContext()).asFlow()
                         .collect { workoutProgress ->
 
-                            if (isPreviousWorkout!!) {
-                                sharedViewModel.latestHistoryEntityFlow.collect { historyItem ->
+                            sharedViewModel.latestHistoryEntityFlow.collect { historyItem ->
+                                if (isPreviousWorkout!! && historyItem.workoutName == exercise!!.name) {
                                     try {
                                         upsertWorkoutHistory(
                                             historyItem.id,
@@ -226,17 +226,17 @@ class ExerciseFragment : Fragment(){
                                         )
                                     }
 
-                                }
-                            } else {
-                                try {
-                                    upsertWorkoutHistory(
-                                        null,
-                                        exercise!!.name!!,
-                                        isCompleted,
-                                        workoutProgress
-                                    )
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
+                                } else {
+                                    try {
+                                        upsertWorkoutHistory(
+                                            null,
+                                            exercise!!.name!!,
+                                            isCompleted,
+                                            workoutProgress
+                                        )
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
                                 }
                             }
 

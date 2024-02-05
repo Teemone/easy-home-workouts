@@ -39,7 +39,6 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.rvWorkoutHistory.adapter = WorkoutHistoryAdapter{ confirmDeleteItemDialog(it) }
 
         lifecycleScope.launch {
             sharedViewModel.workoutHistoryFlow.collect{
@@ -48,8 +47,9 @@ class HistoryFragment : Fragment() {
                     binding.tvNoHistory.visibility = View.VISIBLE
                 }
                 else{
-                    (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
-                        .submitList(it.toMutableList())
+                    binding.rvWorkoutHistory.adapter =
+                        WorkoutHistoryAdapter(it){item ->
+                            confirmDeleteItemDialog(item, it.indexOf(item)) }
                     binding.rvWorkoutHistory.visibility = View.VISIBLE
                     binding.tvNoHistory.visibility = View.GONE
                 }
@@ -59,22 +59,24 @@ class HistoryFragment : Fragment() {
 
     }
 
-    private fun confirmDeleteItemDialog(item: WorkoutHistoryEntity) {
+    private fun confirmDeleteItemDialog(item: WorkoutHistoryEntity, position: Int) {
         AlertDialog.Builder(requireContext())
             .setTitle("Are you sure?")
             .setMessage("This action will permanently delete this item")
             .setPositiveButton("Yes") { dialog, _ ->
                 sharedViewModel.deleteEntry(item)
-                lifecycleScope.launch {
-                    sharedViewModel.workoutHistoryFlow.collect{
-                        try {
-                            (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
-                                .submitList(it.toMutableList())
-                        }catch (e: Exception){
-                            e.printStackTrace()
-                        }
-                    }
-                }
+                binding.rvWorkoutHistory.adapter?.notifyItemRemoved(position)
+
+//                lifecycleScope.launch {
+//                    sharedViewModel.workoutHistoryFlow.collect{
+//                        try {
+//                            (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
+//                                .submitList(it.toMutableList())
+//                        }catch (e: Exception){
+//                            e.printStackTrace()
+//                        }
+//                    }
+//                }
                 dialog.dismiss()
             }
             .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
