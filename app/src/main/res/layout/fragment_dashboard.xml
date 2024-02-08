@@ -13,66 +13,19 @@
             android:padding="5dp"
             tools:context=".ui.DashboardFragment">
 
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mCardViewPlan"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/mImageViewPlan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                app:cardBackgroundColor="?attr/backgroundColor"
                 android:foreground="@drawable/image_foreground"
                 android:scaleType="centerCrop"
-                app:strokeColor="#1ACF4DB3"
+                android:src="@drawable/db"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearance="@style/CircularCut">
+                app:shapeAppearance="@style/CircularCut"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:foreground="@drawable/image_foreground"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/workout" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:padding="@dimen/parent_padding_10">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_workout_plan"
-                            android:textColor="?attr/colorOnSecondary"
-                            android:background="@drawable/black_caption_background"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/black_caption_background"
-                            android:textColor="?attr/colorOnSecondary"
-                            android:fontFamily="@font/poppins_light"
-                            android:text="@string/no_equipment_required"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    </LinearLayout>
-                </FrameLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!--            In Progress-->
             <TextView
                 android:id="@+id/tvPreviousWorkout"
                 android:layout_width="wrap_content"
@@ -80,8 +33,8 @@
                 android:text="@string/previous_workout"
                 android:textColor="?attr/colorPrimary"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/mCardViewPlan"
-                app:layout_constraintTop_toBottomOf="@id/mCardViewPlan" />
+                app:layout_constraintStart_toStartOf="@id/mImageViewPlan"
+                app:layout_constraintTop_toBottomOf="@id/mImageViewPlan" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mCardViewCurrent"

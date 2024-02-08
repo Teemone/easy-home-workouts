@@ -9,10 +9,10 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/readyToBeginImage"
-        android:layout_width="match_parent"
+        style="@style/Theme.WorkItOut.ReadyToBeginLogo"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:maxHeight="300dp"
-        android:src="@drawable/workout"
         app:layout_constraintBottom_toTopOf="@id/readyToBeginText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

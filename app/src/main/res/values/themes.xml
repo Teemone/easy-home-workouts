@@ -80,6 +80,10 @@
         <item name="android:src">@drawable/app_logo_dark_foreground</item>
     </style>
 
+    <style name="Theme.WorkItOut.ReadyToBeginLogo">
+        <item name="android:src">@drawable/check_mark_dark</item>
+    </style>
+
     <style name="SkipIconColor">
         <item name="tint">?attr/colorControlNormal</item>
     </style>

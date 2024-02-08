@@ -32,6 +32,10 @@
         <item name="android:src">@drawable/app_logo_light_foreground</item>
     </style>
 
+    <style name="Theme.WorkItOut.ReadyToBeginLogo">
+        <item name="android:src">@drawable/check_mark_light</item>
+    </style>
+
 <!--    CardView-->
     <style name="Theme.WorkoutApp.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">?attr/backgroundColor</item>
