@@ -101,16 +101,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    R.id.libraryFragment -> {
-                        toolbar.navigationIcon = null
-                        hideHeaderChipGroup()
-                    }
-
-                    R.id.profileFragment -> {
-                        toolbar.navigationIcon = null
-                        hideHeaderChipGroup()
-                    }
-
                     R.id.hostFragment -> {
                         toolbar.visibility = View.GONE
                         hideHeaderChipGroup()
