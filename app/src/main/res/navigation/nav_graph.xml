@@ -18,7 +18,9 @@
             app:destination="@id/exerciseFragment" />
         <action
             android:id="@+id/action_homeFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -117,6 +119,10 @@
         tools:layout="@layout/fragment_host">
         <action
             android:id="@+id/action_hostFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/hostFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

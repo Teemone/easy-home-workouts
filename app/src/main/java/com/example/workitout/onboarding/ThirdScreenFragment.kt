@@ -27,10 +27,13 @@ class ThirdScreenFragment : Fragment() {
         val btnGetStarted = view.findViewById<Button>(R.id. btnGetStarted)
 
         btnGetStarted.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-
+            findNavController().apply {
+                popBackStack(R.id.hostFragment, true)
+                navigate(R.id.homeFragment)
+            }
             onboardingViewModel.setIsOnboardingCompleted(requireContext(), true)
         }
+
     }
 
 }
