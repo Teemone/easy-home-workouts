@@ -59,24 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/bnv"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mChipGroup"
             tools:context=".ui.HomeFragment" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv"
-            style="@style/BottomNavBar"
-            app:labelVisibilityMode="labeled"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemTextAppearanceActive="@style/BottomNavBarTextActive"
-            app:itemTextAppearanceInactive="@style/BottomNavBarTextInactive"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/bottom_nav_menu">
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,7 +11,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.workitout.R
 import com.example.workitout.adapters.Viewpager2Adapter
 import com.example.workitout.databinding.FragmentHomeBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -20,8 +19,6 @@ class HomeFragment : Fragment(){
     private lateinit var viewPager: ViewPager2
     private lateinit var chipGroup: ChipGroup
     private lateinit var toolbar: Toolbar
-    private lateinit var bnv: BottomNavigationView
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -43,7 +40,6 @@ class HomeFragment : Fragment(){
         viewPager.adapter = viewPagerAdapter
         chipGroup = requireActivity().findViewById(R.id.mChipGroup)
         toolbar = requireActivity().findViewById(R.id.homeToolbar)
-        bnv = requireActivity().findViewById(R.id.bnv)
 
         handleCurrentPage()
         handleChipGroupItem()

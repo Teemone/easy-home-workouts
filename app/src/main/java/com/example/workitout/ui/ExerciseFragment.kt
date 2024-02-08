@@ -184,13 +184,7 @@ class ExerciseFragment : Fragment(){
 
     override fun onStart() {
         super.onStart()
-        sharedViewModel.bottomNavView.value?.visibility = View.GONE
         sharedViewModel.toolbar.value?.title = exercise?.name
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sharedViewModel.bottomNavView.value?.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

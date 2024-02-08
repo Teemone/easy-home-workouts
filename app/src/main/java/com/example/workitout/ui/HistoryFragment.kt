@@ -67,32 +67,10 @@ class HistoryFragment : Fragment() {
                 sharedViewModel.deleteEntry(item)
                 binding.rvWorkoutHistory.adapter?.notifyItemRemoved(position)
 
-//                lifecycleScope.launch {
-//                    sharedViewModel.workoutHistoryFlow.collect{
-//                        try {
-//                            (binding.rvWorkoutHistory.adapter as WorkoutHistoryAdapter)
-//                                .submitList(it.toMutableList())
-//                        }catch (e: Exception){
-//                            e.printStackTrace()
-//                        }
-//                    }
-//                }
                 dialog.dismiss()
             }
             .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
             .show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        sharedViewModel.bottomNavView.value?.visibility = View.GONE
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sharedViewModel.bottomNavView.value?.visibility = View.VISIBLE
-
     }
 
     override fun onDestroy() {

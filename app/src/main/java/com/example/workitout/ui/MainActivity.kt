@@ -11,14 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.workitout.R
 import com.example.workitout.databinding.ActivityMainBinding
 import com.example.workitout.db.WorkoutappApplication
 import com.example.workitout.viewmodel.CustomViewModel
 import com.example.workitout.viewmodel.CustomViewModelFactory
 import com.example.workitout.viewmodel.OnboardingViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -36,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
     private val onboardingViewModel: OnboardingViewModel by viewModels()
-    private lateinit var bottomNavView: BottomNavigationView
     private lateinit var destinationChangedListener: NavController.OnDestinationChangedListener
     private lateinit var toolbar: Toolbar
 
@@ -50,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         binding?.apply {
             toolbar = homeToolbar
-            bottomNavView = bnv
 
         }
 
@@ -76,7 +72,6 @@ class MainActivity : AppCompatActivity() {
 
             setSupportActionBar(toolbar)
             setupActionBarWithNavController(navController)
-            bottomNavView.setupWithNavController(navController)
 
         }
 
@@ -119,7 +114,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.hostFragment -> {
                         toolbar.visibility = View.GONE
                         hideHeaderChipGroup()
-                        bottomNavView.visibility = View.GONE
                     }
 
                     else -> toolbar.setNavigationOnClickListener {
@@ -130,8 +124,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         sharedViewModel.setToolbar(toolbar)
-        sharedViewModel.setBnv(bottomNavView)
-
 
         lifecycleScope.launch {
             sharedViewModel.getWorkoutInfoAddedToDb(this@MainActivity)
@@ -154,7 +146,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showNavigation(){
         toolbar.visibility = View.VISIBLE
-        bottomNavView.visibility = View.VISIBLE
         findViewById<ChipGroup>(R.id.mChipGroup).visibility = View.VISIBLE
     }
 

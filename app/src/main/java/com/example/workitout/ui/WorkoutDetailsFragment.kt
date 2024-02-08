@@ -72,13 +72,6 @@ class WorkoutDetailsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         sharedViewModel.toolbar.value?.title = exercise?.name
-        sharedViewModel.bottomNavView.value?.visibility = View.GONE
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sharedViewModel.bottomNavView.value?.visibility = View.VISIBLE
-
     }
 
     private fun displayChip(){

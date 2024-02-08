@@ -1,7 +1,6 @@
 package com.example.workitout.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +16,6 @@ import com.example.workitout.db.dao.WorkoutHistoryDao
 import com.example.workitout.db.dao.WorkoutInfoDao
 import com.example.workitout.db.tables.WorkoutHistoryEntity
 import com.example.workitout.db.tables.WorkoutInfoEntity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +26,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
-const val TAG = "VIEW-MODEL DUMP"
 const val EXERCISE = "exercise"
 
 class CustomViewModel(
@@ -39,9 +36,6 @@ class CustomViewModel(
 
     private var _toolbar = MutableLiveData<Toolbar>()
     val toolbar: LiveData<Toolbar> = _toolbar
-
-    private var _bottomNavView = MutableLiveData<BottomNavigationView>()
-    val bottomNavView: LiveData<BottomNavigationView> = _bottomNavView
 
     private var _workoutInfoFlow = MutableStateFlow<List<WorkoutInfoEntity>>(listOf())
     val workoutInfoFlow: StateFlow<List<WorkoutInfoEntity>> = _workoutInfoFlow
@@ -180,11 +174,6 @@ class CustomViewModel(
         return datastore.getCurrentExerciseId.asLiveData()
     }
 
-    fun getIsNightMode(context: Context): Flow<Boolean?>{
-        datastore = AppPrefsDatastore(context)
-        return datastore.getIsNightMode
-    }
-
     fun getFollowsSysDef(context: Context): Flow<Boolean?>{
         datastore = AppPrefsDatastore(context)
         return datastore.getFollowsSysDef
@@ -223,10 +212,6 @@ class CustomViewModel(
 
     fun setToolbar(tb: Toolbar){
         _toolbar.value = tb
-    }
-
-    fun setBnv(bnv: BottomNavigationView){
-        _bottomNavView.value = bnv
     }
 
     fun setTimeLeftForCurrentWorkout(timeLeft: Int, context: Context, exercise: Exercises){
@@ -300,7 +285,6 @@ class CustomViewModel(
 
     enum class TimerState {
         RUNNING,
-        PAUSED,
         FINISHED
     }
 
