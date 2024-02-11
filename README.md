@@ -24,8 +24,8 @@ Easy Home Workouts is perfect for **Beginners** looking to get started with fitn
 
 #### **Ready to get started?**
 
-Simply clone the repo using <a href=''>this<a/>, alternatively, download the project <a href=''>here<a/>.
+Simply clone the repo using <a href='https://github.com/Teemone/easy-home-workouts.git'>this<a/>, alternatively, download the project <a href='https://github.com/Teemone/easy-home-workouts/archive/refs/heads/main.zip'>here<a/>.
 
 ## License
 
-**Easy home workouts** is distributed under the <a href=''>MIT License<a/>
+**Easy home workouts** is distributed under the <a href='https://github.com/Teemone/easy-home-workouts/tree/main#'>MIT License<a/>
