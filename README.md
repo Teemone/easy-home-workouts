@@ -28,4 +28,4 @@ Simply clone the repo using <a href='https://github.com/Teemone/easy-home-workou
 
 ## License
 
-**Easy home workouts** is distributed under the <a href='https://github.com/Teemone/easy-home-workouts/tree/main#'>MIT License<a/>
+**Easy home workouts** is distributed under the <a href='https://github.com/Teemone/easy-home-workouts/tree/main?tab=MIT-1-ov-file#'>MIT License<a/>
