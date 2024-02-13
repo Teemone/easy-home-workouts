@@ -203,35 +203,40 @@ class ExerciseFragment : Fragment(){
                         .collect { workoutProgress ->
 
                             sharedViewModel.latestHistoryEntityFlow.collect { historyItem ->
-                                if (isPreviousWorkout!! && historyItem.workoutName == exercise!!.name) {
-                                    try {
-                                        upsertWorkoutHistory(
-                                            historyItem.id,
-                                            historyItem.workoutName,
-                                            isCompleted,
-                                            workoutProgress
-                                        )
-                                    } catch (e: NullPointerException) {
-                                        upsertWorkoutHistory(
-                                            null,
-                                            exercise!!.name!!,
-                                            isCompleted,
-                                            workoutProgress
-                                        )
-                                    }
 
-                                } else {
-                                    try {
-                                        upsertWorkoutHistory(
-                                            null,
-                                            exercise!!.name!!,
-                                            isCompleted,
-                                            workoutProgress
-                                        )
-                                    } catch (e: Exception) {
-                                        e.printStackTrace()
+                                try {
+                                    if (isPreviousWorkout!! && historyItem.workoutName == exercise!!.name) {
+                                        try {
+                                            upsertWorkoutHistory(
+                                                historyItem.id,
+                                                historyItem.workoutName,
+                                                isCompleted,
+                                                workoutProgress
+                                            )
+                                        } catch (e: NullPointerException) {
+                                            upsertWorkoutHistory(
+                                                null,
+                                                exercise!!.name!!,
+                                                isCompleted,
+                                                workoutProgress
+                                            )
+                                        }
+
                                     }
-                                }
+                                    else {
+                                        try {
+                                            upsertWorkoutHistory(
+                                                null,
+                                                exercise!!.name!!,
+                                                isCompleted,
+                                                workoutProgress
+                                            )
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+                                }catch (_: NullPointerException){}
+
                             }
 
 
