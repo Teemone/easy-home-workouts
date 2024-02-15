@@ -12,9 +12,11 @@ Easy Home Workouts provides simple, effective and equipment-free exercises you c
 
 ## Screenshots
 
-App main interface screenshot: screenshot1.png
-Workout routine screenshot: screenshot2.png
-Exercise demonstration screenshot: screenshot3.png
+<img align="left" width="300" src="home.png " alt = "Home screen">
+<img align="left" width="300" src="workout_list.png " alt = "List of workouts">
+<img align="left" width="300" src="exercise.png " alt = "Individual exercise screen">
+<img align="left" width="300" src="ex-details.png " alt = "Exercise info">
+
 
 ## Get started
 
