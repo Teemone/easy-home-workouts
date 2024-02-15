@@ -15,8 +15,7 @@ Easy Home Workouts provides simple, effective and equipment-free exercises you c
 <img align="left" width="300" src="home.png " alt = "Home screen">
 <img align="left" width="300" src="workout_list.png " alt = "List of workouts">
 <img align="left" width="300" src="exercise.png " alt = "Individual exercise screen">
-<img align="left" width="300" src="ex-details.png " alt = "Exercise info">
-
+<img align="left" width="300" src="ex-details.png " alt = "Exercise info"> <br>
 
 ## Get started
 
